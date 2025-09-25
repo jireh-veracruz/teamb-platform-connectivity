@@ -1,0 +1,53 @@
+#include "common.h"
+
+#include "log.h"
+
+
+int store_all_data_asap(void);
+void emergency_shutdown(void);
+
+int flag_running = 1;
+
+
+void main(void)
+{
+    //hardware related init
+
+    //dont forget to init all gpio
+    // and peripherals even those 
+    // not in use
+
+    //custom firmware lib
+
+    while(flag_running)
+    {
+        //maybe create a thread for our custom 
+        //firmware lib
+        //and other inits
+
+#ifdef PROJ_CONNECT
+        connect_app();
+#endif
+
+#ifdef PROJ_CONTROLBOARD
+        controlboard_app()
+#endif
+
+#ifdef PROJ_OILMS
+        oilms_app();
+#endif
+
+#ifdef PROJ_DUMMY
+        app();
+#endif
+
+        log_service();
+    }
+
+    //must not reach this point
+    //save all livedata
+    store_all_data_asap();
+
+    //force shutdown
+    emergency_shutdown();
+}

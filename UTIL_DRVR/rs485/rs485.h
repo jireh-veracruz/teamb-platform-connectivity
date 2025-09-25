@@ -1,5 +1,5 @@
-#ifndef __CAN_H__
-#define __CAN_H__
+#ifndef __RS485_H__
+#define __RS485_H__
 
 
 #define BUS_COMM_H
@@ -34,19 +34,12 @@
 #define ROLE_MASTER            0
 #define ROLE_SLAVE             1
 
-// =======================
-// Utility Macros
-// =======================
-#define IS_VALID_MSG(msg)      (strcmp(msg, MSG_HANDSHAKE_INIT) == 0 || \
-                                strcmp(msg, MSG_HANDSHAKE_ACK) == 0 || \
-                                strcmp(msg, MSG_DATA_READY) == 0 || \
-                                strcmp(msg, MSG_DATA_RECEIVED) == 0)
 
-int can_init(void);
-int can_write_to_bus(const char *msg, int device_id);
-int can_read_from_bus(char *buffer, int device_id);
-int can_clear_bus(void);
-void can_device_communicate(int device_id);
+int rs485_init(void);
+int rs485_write_to_bus(const char *msg, int device_id);
+int rs485_read_from_bus(char *buffer, int device_id);
+int rs485_clear_bus(void);
+void rs485_device_communicate(int device_id);
 
 
-#endif //__CAN_H__
+#endif //__RS485_H__
