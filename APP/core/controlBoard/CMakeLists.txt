@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.10)
+project(controlBoard C)
+enable_language(ASM)
+
+# Set the C standard
+set(CMAKE_C_STANDARD 99)
+
+# Add the executable
+add_executable(controlBoard 
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.c
+    ${CMAKE_SOURCE_DIR}/BSP/stm32/startup_stm32h743xx.S
+    ${CMAKE_SOURCE_DIR}/BSP/stm32/crt_stubs.c
+)
+
+# Include directories
+include_directories(${CMAKE_SOURCE_DIR})
+
+target_link_options(controlBoard PRIVATE
+    "-T${CMAKE_SOURCE_DIR}/BSP/stm32/STM32H743XI_FLASH.ld"
+    "-nostartfiles"
+    "-nostdlib"
+)
