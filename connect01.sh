@@ -1,1 +1,1 @@
-"AAA" 
+gcc *.* -o connectivity.out
