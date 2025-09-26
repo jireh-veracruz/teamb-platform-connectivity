@@ -9,6 +9,9 @@ void emergency_shutdown(void);
 int flag_running = 1;
 
 
+//TODO: find a way for main to be absract regardless of the
+//      
+
 void main(void)
 {
     //hardware related init
