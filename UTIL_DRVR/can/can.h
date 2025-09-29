@@ -45,7 +45,7 @@
 int can_init(void);
 int can_write_to_bus(const char *msg, int device_id);
 int can_read_from_bus(char *buffer, int device_id);
-int can_clear_bus(void);
+void can_clear_bus(void);
 void can_device_communicate(int device_id);
 
 

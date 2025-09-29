@@ -21,7 +21,7 @@
 #define USERNAME            "kermithcute"
 #define PASSWORD            "123456"
 
-int msg_recv = MSG_NONE;
+char msg_recv = MSG_NONE;
 int status_device = 
 
 void establish_connectivity_to_server(void)
@@ -46,23 +46,23 @@ void connect_app(void)
     handshake_receive_data(&msg_recv);
     switch(msg_recv)
     {
-        case MSG_NONE:
+        case COMMON_MSG_NONE:
             break;
-        case MSG_HI:
+        case COMMON_MSG_HI:
             break;
-        case MSG_HELLO:
+        case COMMON_MSG_HELLO:
             break;
-        case MSG_BROADCAST:
+        case COMMON_MSG_BROADCAST:
             break;
-        case MSG_ID_DESTI:
+        case COMMON_MSG_ID_DESTI:
             break;
-        case MSG_RAND_HOLD:
+        case COMMON_MSG_RAND_HOLD:
             break;
-        case MSG_READ:
+        case COMMON_MSG_READ:
             break;
-        case MSG_WRITE:
+        case COMMON_MSG_WRITE:
             break;
-        case MSG_CMD:
+        case COMMON_MSG_CMD:
             break;
         default:
             ;   //do nothing !!!

@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Add subdirectories
-add_subdirectory(APP)
-add_subdirectory(BSP)
-add_subdirectory(CUSTOM)
-add_subdirectory(UTIL_DRVR)
+add_subdirectory(${CMAKE_SOURCE_DIR}/APP)
+add_subdirectory(${CMAKE_SOURCE_DIR}/BSP)
+add_subdirectory(${CMAKE_SOURCE_DIR}/CUSTOM)
+add_subdirectory(${CMAKE_SOURCE_DIR}/UTIL_DRVR)

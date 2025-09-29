@@ -1,4 +1,5 @@
-
+#include <stdio.h>
+#include <string.h>
 #include "can.h"
 
 
@@ -52,7 +53,7 @@ void can_device_communicate(int device_id) {
 
     if (strcmp(buffer, HANDSHAKE_MSG) != 0) {
         printf("Device %d: Handshake failed. Received corrupted message.\n", device_id);
-        clear_bus();
+        can_clear_bus();
         return;
     }
 

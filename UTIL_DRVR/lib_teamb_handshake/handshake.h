@@ -8,14 +8,14 @@
 #define DEV_STATUS_WAITING              3
 
 //change this to enum
-#define MSG_PING                        0
-#define MSG_PING_REPLY                  1
-#define MSG_SEND_DAT                    2
-#define MSG_RECV_DAT                    3
-#define MSG_COMMAND                     4
-#define MSG_ADDRESS                     5
-#define MSG_DATA                        6
-#define MSG_BROADCAST                   7
+#define HANDSHAKE_MSG_PING                        0
+#define HANDSHAKE_MSG_PING_REPLY                  1
+#define HANDSHAKE_MSG_SEND_DAT                    2
+#define HANDSHAKE_MSG_RECV_DAT                    3
+#define HANDSHAKE_MSG_COMMAND                     4
+#define HANDSHAKE_MSG_ADDRESS                     5
+#define HANDSHAKE_MSG_DATA                        6
+#define HANDSHAKE_MSG_BROADCAST                   7
 
 #define MAX_BUFF_SIZE                   10
 
