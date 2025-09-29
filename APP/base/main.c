@@ -1,7 +1,7 @@
 #include "common.h"
 
 #include "log.h"
-
+#include "app.h"
 
 int store_all_data_asap(void);
 void emergency_shutdown(void);
@@ -21,6 +21,9 @@ void main(void)
     // not in use
 
     //custom firmware lib
+#ifdef PROJ_CONNECT
+        setup_connect_app();
+#endif
 
     while(flag_running)
     {

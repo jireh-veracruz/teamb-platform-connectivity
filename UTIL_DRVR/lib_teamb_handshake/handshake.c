@@ -27,7 +27,7 @@ void handshake_service(void)
     //handler of service 
 }
 
-void handshake_receive_data(char* buff)
+void handshake_receive_data(char* data, int len)
 {
     char buff[MAX_BUFF_SIZE];
 

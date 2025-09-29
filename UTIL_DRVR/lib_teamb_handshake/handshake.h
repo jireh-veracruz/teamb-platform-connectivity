@@ -7,6 +7,7 @@
 #define DEV_STATUS_ACTIVE               2
 #define DEV_STATUS_WAITING              3
 
+//change this to enum
 #define MSG_PING                        0
 #define MSG_PING_REPLY                  1
 #define MSG_SEND_DAT                    2
@@ -32,12 +33,17 @@
 #define MSG_IDLE               "IDLE"
 
 
-void init_handshake(void);
+int init_handshake(void);
 void handshake_service(void);
-void handshake_receive_data(char* buff);
-int handshake_send_data(char* data, int len);
+
+void handshake_receive_data(int id, char* data);
+int handshake_send_data(int id, char* data);
+
+int handshake_send_handshake_request(int id);
+int handshake_reply_to_handshake_request(int id);
+
 int handshake_device_ready(void);
-void deinit_handshake(void);
+int deinit_handshake(void);
 int register_device_handshake(void* device);
 
 
