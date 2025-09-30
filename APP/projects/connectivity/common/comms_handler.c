@@ -9,20 +9,12 @@
 #include "comms_msgs.h"
 
 
-char msg_recv = COMMON_MSG_NONE;
-int status_device = 0;
-
-
-
 //NOTE: no while loop inside app
 int connectivity_comms_handler(char* data, int len)
 {
-    
-    //input handler - wait do we have pushbotton or keyboard???
-
     //comms message handler
-    handshake_receive_data(0, &msg_recv);
-    switch(msg_recv)
+    handshake_receive_data(data, 1);
+    switch(data[0])
     {
         case COMMON_MSG_NONE:
             break;
@@ -46,7 +38,5 @@ int connectivity_comms_handler(char* data, int len)
             ;   //do nothing !!!
     }
 
-
-
-
+    return data[1];
 }
