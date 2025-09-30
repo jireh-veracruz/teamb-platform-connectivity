@@ -1,3 +1,0 @@
-/home/runner/work/teamb-platform-control-board/teamb-platform-control-board/EXAMPLE_APP/lib_teamb_handshake/build/CMakeFiles/handshake_app.dir
-/home/runner/work/teamb-platform-control-board/teamb-platform-control-board/EXAMPLE_APP/lib_teamb_handshake/build/CMakeFiles/edit_cache.dir
-/home/runner/work/teamb-platform-control-board/teamb-platform-control-board/EXAMPLE_APP/lib_teamb_handshake/build/CMakeFiles/rebuild_cache.dir
