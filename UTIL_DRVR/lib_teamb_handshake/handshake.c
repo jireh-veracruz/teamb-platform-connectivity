@@ -2,21 +2,19 @@
 #include "handshake.h"
 #include "common.h"
 
+#include "hal_comms.h"
+
 int flag_is_device_communicating = NO;
 
 
-int (*handshake_send_data)(int destination, int buffer) =  NULL;
-int (*handshake_receive_data)(int destination, int buffer) =  NULL;
-int (*handshake_comms_ready)(void) = NULL;
+
 
 void init_handshake(void)
 {
-    handshake_send_data = CAN_SEND;
-    handshake_receive_data = CAN_RECV;
-    handshake_comms_ready = CAN_READY;
+
 }
 
-void handshake_service(void)
+void teamb_handshake_service(void)
 {
     //wait for activity
 
@@ -25,34 +23,37 @@ void handshake_service(void)
     //if waiting for data, loop the targt bus
 
     //handler of service 
+
+    hal_service();
 }
 
-void handshake_receive_data(char* data, int len)
+void teamb_handshake_receive_data(char* data, int len)
 {
     char buff[MAX_BUFF_SIZE];
 
-    if(handshake_receive_data(buff, 0))
+    hal_receive_data(buff, 1);
+    if(buff == 0xFF)
     {
         //do something
     }
 }
 
-int handshake_send_data(char* data, int len)
+int teamb_handshake_send_data(char* data, int len)
 {
-    handshake_send_data(handshake_send_data, 0);
+    hal_send_data(data, 1);
 }
 
-int handshake_device_ready(void)
+int teamb_handshake_device_ready(void)
 {
-    return handshake_comms_ready();
+    return hal_device_ready();
 }
 
-void deinit_handshake(void)
+void teamb_deinit_handshake(void)
 {
 
 }
 
-int register_device_handshake(void* device)
+int teamb_register_device_handshake(void* device)
 {
 
 }

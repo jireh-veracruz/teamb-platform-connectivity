@@ -2,11 +2,13 @@
 #define __HAL_COMMS_H__
 
 
-int init_hal_comms(void);
-int hal_set_comms_device_id(int device_id);
-int hal_send_msg_from_comms(char* databuff, int len);
-int hal_recv_msg_from_comms(char* buff, int len);
-int deinit_hal_comms(void);
+void hal_init(void);
+void hal_service(void);
+void hal_receive_data(char* data, int len);
+int hal_send_data(char* data, int len);
+int hal_device_ready(void);
+void hal_deinit(void);
+int hal_register_device(void* device);
 
 
 

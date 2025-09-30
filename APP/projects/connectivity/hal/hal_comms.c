@@ -12,27 +12,47 @@
 #include "common.h"
 
 
-int init_hal_comms(void)
+int (*hal_set_data)(int destination, int buffer) =  NULL;
+int (*hal_get_data)(int destination, int buffer) =  NULL;
+int (*hal_comms_ready)(void) = NULL;
+
+
+void hal_init(void)
+{
+    hal_set_data = GENERIC_SEND;
+    hal_get_data = GENERIC_RECV;
+    hal_comms_ready = GENERIC_READY;
+
+}
+
+void hal_service(void)
+{
+    //do service routine
+}
+
+void hal_receive_data(char* data, int len)
+{
+    hal_get_data(data, len);
+}
+
+int hal_send_data(char* data, int len)
+{
+    return hal_set_data(data, len);
+}
+
+int hal_device_ready(void)
+{
+    return hal_comms_ready();
+}
+
+void hal_deinit(void)
+{
+    
+}
+
+int hal_register_device(void* device)
 {
     return -1;
 }
 
-int hal_set_comms_device_id(int device_id)
-{
-    return -1;
-}
 
-int hal_send_msg_from_comms(char* databuff, int len)
-{
-    return -1;
-}
-
-int hal_recv_msg_from_comms(char* buff, int len)
-{
-    return -1;
-}
-
-int deinit_hal_comms(void)
-{
-    return -1;
-}

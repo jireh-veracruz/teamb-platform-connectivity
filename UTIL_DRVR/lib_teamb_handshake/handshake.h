@@ -33,6 +33,7 @@
 #define MSG_IDLE               "IDLE"
 
 
+#if 0
 int init_handshake(void);
 void handshake_service(void);
 
@@ -45,7 +46,15 @@ int handshake_reply_to_handshake_request(int id);
 int handshake_device_ready(void);
 int deinit_handshake(void);
 int register_device_handshake(void* device);
+#endif
 
+void init_handshake(void);
+void teamb_handshake_service(void);
+void teamb_handshake_receive_data(char* data, int len);
+int teamb_handshake_send_data(char* data, int len);
+int teamb_handshake_device_ready(void);
+void teamb_deinit_handshake(void);
+int teamb_register_device_handshake(void* device);
 
 
 #endif //__HANDSHAKE_H__

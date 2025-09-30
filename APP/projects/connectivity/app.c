@@ -15,14 +15,18 @@
 
 #include "common.h"
 #include "handshake.h"
-#include "comms_data.h"
+#include "comms_msgs.h"
+#include "comms.h"
 
 #define SERVER_IP           "8.8.8.8"
 #define USERNAME            "kermithcute"
 #define PASSWORD            "123456"
 
-char msg_recv = MSG_NONE;
-int status_device = 
+char msg_recv = COMMON_MSG_NONE;
+int status_device = DEV_STAT_UNKNOWN;
+
+char data_buffer[CONN_MAX_MSG_BUFF];
+int returnvalue = 0;
 
 void establish_connectivity_to_server(void)
 {
@@ -41,41 +45,21 @@ void connect_app(void)
 {
     
     //input handler - wait do we have pushbotton or keyboard???
-
-    //comms message handler
-    handshake_receive_data(&msg_recv);
-    switch(msg_recv)
+    returnvalue = connectivity_comms_input(&data_buffer, 1);
+    if(returnvalue == SUCCESS)
     {
-        case COMMON_MSG_NONE:
-            break;
-        case COMMON_MSG_HI:
-            break;
-        case COMMON_MSG_HELLO:
-            break;
-        case COMMON_MSG_BROADCAST:
-            break;
-        case COMMON_MSG_ID_DESTI:
-            break;
-        case COMMON_MSG_RAND_HOLD:
-            break;
-        case COMMON_MSG_READ:
-            break;
-        case COMMON_MSG_WRITE:
-            break;
-        case COMMON_MSG_CMD:
-            break;
-        default:
-            ;   //do nothing !!!
+        //do this!!!
     }
 
-
+    //comms message handler
+    returnvalue = connectivity_comms_handler(&data_buffer, 1);
     //process what to do with the input
 
     //output - execute the planned outcome from
     // process
-
+    returnvalue = connectivity_comms_output(&data_buffer, 5);
 
     
-
-    handshake_service();
+    //service area
+    teamb_handshake_service();
 }

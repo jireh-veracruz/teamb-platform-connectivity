@@ -1,6 +1,8 @@
 #ifndef __CONNECT01_TREE_H__
 #define __CONNECT01_TREE_H__
 
+#include "common.h"
+
 #ifdef UART3
 #define UART3_TX_GPIO       PORTA_BIT4
 #define UART3_RX_GPIO       PORTA_BIT5
@@ -41,16 +43,16 @@
 
 #ifdef CAN_BUS
 #include "can.h"
-#define CAN_SEND        can_write_to_bus
-#define CAN_RECV        can_read_from_bus
-#define CAN_READY       can_clear_bus
+#define GENERIC_SEND        can_write_to_bus
+#define GENERIC_RECV        can_read_from_bus
+#define GENERIC_READY       can_clear_bus
 #endif 
 
 #ifdef RS485_BUS
 #include "rs485.h"
-#define CAN_SEND        rs485_write_to_bus
-#define CAN_RECV        rs485_read_from_bus
-#define CAN_READY       rs485_clear_bus
+#define GENERIC_SEND        rs485_write_to_bus
+#define GENERIC_RECV        rs485_read_from_bus
+#define GENERIC_READY       rs485_clear_bus
 #endif 
 
 #endif //HANDSHAKE_COMMS

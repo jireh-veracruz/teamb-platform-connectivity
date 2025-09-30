@@ -12,6 +12,11 @@
 #define CANCEL              0
 
 
+#define NULL                0
 
+
+#define GENERIC_SEND        NULL
+#define GENERIC_RECV        NULL
+#define GENERIC_READY       NULL
 
 #endif //__COMMON_H__

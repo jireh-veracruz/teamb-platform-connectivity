@@ -13,13 +13,9 @@ char msg_recv = COMMON_MSG_NONE;
 int status_device = 0;
 
 
-void setup_connect_app(void)
-{
-    //init variables and device here!!!
-}
 
 //NOTE: no while loop inside app
-void connect_app(void)
+int connectivity_comms_handler(char* data, int len)
 {
     
     //input handler - wait do we have pushbotton or keyboard???
