@@ -4,7 +4,7 @@
 
 int connectivity_comms_input(char* data, int len);
 int connectivity_comms_handler(char* data, int len);
-int connectivity_comms_output(char* data, int len)
+int connectivity_comms_output(char* data, int len);
 
 
 
