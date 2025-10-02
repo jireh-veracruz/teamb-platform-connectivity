@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project(teamb_platform_control_board)
+project(teamb_platform_control_board C ASM)
 
 # Set C standard
 set(CMAKE_C_STANDARD 11)
