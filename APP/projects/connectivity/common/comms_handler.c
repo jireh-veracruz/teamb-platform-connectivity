@@ -12,8 +12,9 @@
 //NOTE: no while loop inside app
 int connectivity_comms_handler(char* data, int len)
 {
+    (void)len;
     //comms message handler
-    handshake_receive_data(data, 1);
+    teamb_handshake_receive_data(data, 1);
     switch(data[0])
     {
         case COMMON_MSG_NONE:

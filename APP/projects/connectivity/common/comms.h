@@ -1,7 +1,6 @@
 #ifndef __COMMS_H__
 #define __COMMS_H__
 
-
 int connectivity_comms_input(char* data, int len);
 int connectivity_comms_handler(char* data, int len);
 int connectivity_comms_output(char* data, int len);
