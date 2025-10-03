@@ -26,7 +26,7 @@ jobs:
                platform-builder \
                bash -c "
                  mkdir build && cd build && 
-                 cmake -DCMAKE_TOOLCHAIN_FILE=../BSP/stm32/toolchain.cmake && 
+                 cmake .. -DCMAKE_TOOLCHAIN_FILE=../BSP/stm32/toolchain.cmake && 
                  make && 
                  echo 'Copying build artifacts...' && 
                  find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
