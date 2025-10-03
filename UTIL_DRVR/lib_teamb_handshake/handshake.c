@@ -29,18 +29,19 @@ void teamb_handshake_service(void)
 
 void teamb_handshake_receive_data(char* data, int len)
 {
-    char buff[MAX_BUFF_SIZE];
+    // char buff[MAX_BUFF_SIZE];
 
-    hal_receive_data(buff, 1);
-    if(buff == 0xFF)
-    {
-        //do something
-    }
+    hal_receive_data(data, len);
+    // if(buff == (char)0xFF)
+    // {
+    //     //do something
+    // }
 }
 
 int teamb_handshake_send_data(char* data, int len)
 {
-    hal_send_data(data, 1);
+    hal_send_data(data, len);
+    return 0;
 }
 
 int teamb_handshake_device_ready(void)
@@ -53,7 +54,7 @@ void teamb_deinit_handshake(void)
 
 }
 
-int teamb_register_device_handshake(void* device)
+int teamb_register_device_handshake(void)
 {
-
+    return 0;
 }

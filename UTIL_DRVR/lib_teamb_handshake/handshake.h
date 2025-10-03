@@ -54,7 +54,7 @@ void teamb_handshake_receive_data(char* data, int len);
 int teamb_handshake_send_data(char* data, int len);
 int teamb_handshake_device_ready(void);
 void teamb_deinit_handshake(void);
-int teamb_register_device_handshake(void* device);
+int teamb_register_device_handshake(void);
 
 
 #endif //__HANDSHAKE_H__

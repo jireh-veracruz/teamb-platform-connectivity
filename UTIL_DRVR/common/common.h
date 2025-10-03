@@ -12,7 +12,7 @@
 #define CANCEL              0
 
 
-#define NULL                0
+// #define NULL                0
 
 
 #define GENERIC_SEND        NULL
