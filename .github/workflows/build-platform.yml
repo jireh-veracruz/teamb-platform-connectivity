@@ -1,0 +1,38 @@
+name: Build Platform Firmware
+
+on:
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ]
+    workflow_dispatch:
+
+jobs:
+    build-connectivity:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+        
+        - name: Build Docker image
+          run: |
+            docker build -t platform-builder .
+
+        - name: Build Connectivity firmware
+          run: |
+            docker run --rm \
+              -v $PWD/build-ouput:/build-output \
+               platform-builder \
+               bash -c "
+                 mkdir build && cd build && 
+                 cmake -DCMAKE_TOOLCHAIN_FILE=../BSP/stm32/toolchain.cmake && 
+                 make && 
+                 echo 'Copying build artifacts...' && 
+                 find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
+                " 
+        - name: Upload build artifacts
+          uses: actions/upload-artifact@v4
+          with:
+            name: connectivity-firmware
+            path: build-output/*
