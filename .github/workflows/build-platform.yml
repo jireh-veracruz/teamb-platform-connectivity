@@ -22,7 +22,7 @@ jobs:
         - name: Build Connectivity firmware
           run: |
             docker run --rm \
-              -v $PWD/build-ouput:/build-output \
+              -v $PWD/build-output:/build-output \
                platform-builder \
                bash -c "
                  mkdir build && cd build && 
