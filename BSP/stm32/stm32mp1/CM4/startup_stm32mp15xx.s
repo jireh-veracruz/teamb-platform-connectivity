@@ -38,12 +38,14 @@ Reset_Handler:
   bl  SystemInit
   bl  main
   b   .
+.size Reset_Handler, . - Reset_Handler
 
 /* Default handlers */
 .section .text.Default_Handler
 .type Default_Handler, %function
 Default_Handler:
   b .
+.size Default_Handler, . - Default_Handler
 
 /* Weak aliases */
 .weak NMI_Handler
@@ -65,6 +67,3 @@ SVC_Handler:          b .
 DebugMon_Handler:     b .
 PendSV_Handler:       b .
 SysTick_Handler:      b .
-
-.size Reset_Handler, . - Reset_Handler
-.size Default_Handler, . - Default_Handler
