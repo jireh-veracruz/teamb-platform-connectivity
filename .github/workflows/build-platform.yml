@@ -8,8 +8,20 @@ on:
     workflow_dispatch:
 
 jobs:
-    build-controlBoard:
+    build-platform-firmware:
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                project: 
+                    - name: "connectivity"
+                      cmake_option: "BUILD_CONNECTIVITY=ON"
+                      artifact_name: "connectivity-firmware"
+                    - name: "controlBoard" 
+                      cmake_option: "BUILD_CONTROLBOARD=ON"
+                      artifact_name: "controlBoard-firmware"
+                    - name: "oilMs"
+                      cmake_option: "BUILD_OILMS=ON" 
+                      artifact_name: "oilMs-firmware"
 
         steps:
         - name: Checkout code
@@ -19,20 +31,21 @@ jobs:
           run: |
             docker build -t platform-builder .
 
-        - name: Build Control Board firmware
+        - name: Build ${{ matrix.project.name }} firmware
           run: |
             docker run --rm \
-              -v $PWD/build-output:/build-output \
+              -v $PWD/build-output-${{ matrix.project.name }}:/build-output \
                platform-builder \
                bash -c "
                  mkdir build && cd build && 
-                 cmake .. -DCMAKE_TOOLCHAIN_FILE=../BSP/stm32/toolchain.cmake -DBUILD_CONTROLBOARD=ON && 
+                 cmake .. -DCMAKE_TOOLCHAIN_FILE=../BSP/stm32/toolchain.cmake -D${{ matrix.project.cmake_option }} && 
                  make && 
-                 echo 'Copying build artifacts...' && 
+                 echo 'Copying ${{ matrix.project.name }} build artifacts...' && 
                  find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
                 " 
-        - name: Upload build artifacts
+        - name: Upload ${{ matrix.project.name }} artifacts
           uses: actions/upload-artifact@v4
           with:
-            name: controlBoard-firmware
-            path: build-output/*
+            name: ${{ matrix.project.artifact_name }}
+            path: build-output-${{ matrix.project.name }}/*
+            retention-days: 30
