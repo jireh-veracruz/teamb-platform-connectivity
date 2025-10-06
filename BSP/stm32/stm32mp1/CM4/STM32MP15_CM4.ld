@@ -39,9 +39,11 @@ SECTIONS
   .bss :
   {
     _sbss = .;
+    __bss_start__ = .;
     *(.bss*)
     *(COMMON)
     _ebss = .;
+    __bss_end__ = .;
   } >RAM
 
   /* Stack */
@@ -51,6 +53,7 @@ SECTIONS
     _stack_start = .;
     . = . + 0x400; /* 1KB stack */
     _stack_end = .;
+    _estack = .; /* For startup code compatibility */
   } >RAM
 
   /* Heap (optional) */
@@ -60,5 +63,6 @@ SECTIONS
     _heap_start = .;
     . = . + 0x400; /* 1KB heap */
     _heap_end = .;
+    _end = .; /* End of memory for sbrk */
   } >RAM
 }

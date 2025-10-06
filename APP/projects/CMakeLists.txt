@@ -1,5 +1,5 @@
 # Define options to control which modules to build
-option(BUILD_CONNECTIVITY "Build the connectivity module" OFF )
+option(BUILD_CONNECTIVITY "Build the connectivity module" ON )
 option(BUILD_OILMS "Build the oilms module" OFF)
 option(BUILD_CONTROLBOARD "Build the controlBoard module" OFF )
 
