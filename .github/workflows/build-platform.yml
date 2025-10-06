@@ -19,14 +19,14 @@ jobs:
           run: |
             docker build -t platform-builder .
 
-        - name: Build Connectivity firmware
+        - name: Build Control Board firmware
           run: |
             docker run --rm \
               -v $PWD/build-output:/build-output \
                platform-builder \
                bash -c "
                  mkdir build && cd build && 
-                 cmake .. -DCMAKE_TOOLCHAIN_FILE=../BSP/stm32/toolchain.cmake && 
+                 cmake .. -DCMAKE_TOOLCHAIN_FILE=../BSP/stm32/toolchain.cmake -DBUILD_CONTROLBOARD=ON && 
                  make && 
                  echo 'Copying build artifacts...' && 
                  find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
