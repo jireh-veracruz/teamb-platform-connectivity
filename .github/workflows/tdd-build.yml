@@ -1,0 +1,135 @@
+name: TDD and Build Platform Firmware
+
+on:
+    push:
+        branches: [ main, develop ]
+    pull_request:
+        branches: [ main, develop ]
+    workflow_dispatch:
+
+jobs:
+    # Run all TDD tests
+    run-tdd-tests:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+          with:
+            submodules: recursive  # In case cpputest is a submodule
+        
+        - name: Install test dependencies
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y \
+              build-essential \
+              cmake \
+              ninja-build \
+              git \
+              wget \
+              curl \
+              python3 \
+              python3-pip \
+              gcc-arm-none-eabi \
+              libnewlib-arm-none-eabi \
+              lcov \
+              gcovr
+        
+        - name: Build and run TDD tests
+          run: |
+            cd TDD
+            echo "Available test directories:"
+            ls -la
+            echo "Running all TDD tests..."
+            make all
+        
+        - name: Generate test coverage report
+          run: |
+            cd TDD
+            # Generate coverage reports if available
+            find . -name "*.gcda" -o -name "*.gcno" | head -5
+            if [ -n "$(find . -name "*.gcda" 2>/dev/null)" ]; then
+              echo "Generating coverage report..."
+              gcovr -r . --html --html-details -o coverage.html
+            else
+              echo "No coverage data found"
+            fi
+        
+        - name: Upload test results
+          uses: actions/upload-artifact@v4
+          if: always()  # Upload even if tests fail
+          with:
+            name: tdd-test-results
+            path: |
+              TDD/**/*.xml
+              TDD/**/*.html
+              TDD/**/coverage.*
+            retention-days: 30
+
+    # Build firmware (only if tests pass)
+    build-platform-firmware:
+        needs: run-tdd-tests  # Only run if TDD tests pass
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                project: 
+                    - name: "connectivity"
+                      cmake_option: "BUILD_CONNECTIVITY=ON"
+                      artifact_name: "connectivity-firmware"
+                      paths: "APP/projects/connectivity/**"
+                    - name: "controlBoard" 
+                      cmake_option: "BUILD_CONTROLBOARD=ON"
+                      artifact_name: "controlBoard-firmware"
+                      paths: "APP/projects/controlBoard/**"
+                    - name: "oilMs"
+                      cmake_option: "BUILD_OILMS=ON" 
+                      artifact_name: "oilMs-firmware"
+                      paths: "APP/projects/oilMs/**"
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+        
+        - name: Check for changes in ${{ matrix.project.name }}
+          uses: dorny/paths-filter@v2
+          id: changes
+          with:
+            filters: |
+              project:
+                - '${{ matrix.project.paths }}'
+                - 'BSP/**'
+                - 'UTIL_DRVR/**'
+                - 'CMakeLists.txt'
+                - 'Dockerfile'
+        
+        - name: Skip if no changes
+          if: steps.changes.outputs.project != 'true'
+          run: |
+            echo "Skipping ${{ matrix.project.name }} - no relevant changes detected"
+            exit 0
+        
+        - name: Build Docker image
+          if: steps.changes.outputs.project == 'true'
+          run: |
+            docker build -t platform-builder .
+
+        - name: Build ${{ matrix.project.name }} firmware
+          if: steps.changes.outputs.project == 'true'
+          run: |
+            docker run --rm \
+              -v $PWD/build-output-${{ matrix.project.name }}:/build-output \
+               platform-builder \
+               bash -c "
+                 mkdir build && cd build && 
+                 cmake .. -DCMAKE_TOOLCHAIN_FILE=../BSP/stm32/toolchain.cmake -D${{ matrix.project.cmake_option }} && 
+                 make && 
+                 echo 'Copying ${{ matrix.project.name }} build artifacts...' && 
+                 find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
+                " 
+        
+        - name: Upload ${{ matrix.project.name }} artifacts
+          if: steps.changes.outputs.project == 'true'
+          uses: actions/upload-artifact@v4
+          with:
+            name: ${{ matrix.project.artifact_name }}
+            path: build-output-${{ matrix.project.name }}/*
+            retention-days: 30
