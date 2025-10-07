@@ -37,10 +37,13 @@ jobs:
         - name: Build and run TDD tests
           run: |
             cd TDD
-            echo "Available test directories:"
-            ls -la
             echo "Running all TDD tests..."
-            make all
+            # Fix line endings for Windows-created files
+            sed -i 's/\r$//' Run_AllTest.sh
+            # Make script executable
+            chmod +x Run_AllTest.sh
+            # Run the test script
+            ./Run_AllTest.sh 
         
         - name: Generate test coverage report
           run: |
