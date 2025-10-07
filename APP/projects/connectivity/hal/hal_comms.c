@@ -12,16 +12,16 @@
 #include "common.h"
 
 
-int (*hal_set_data)(int destination, int buffer) =  NULL;
-int (*hal_get_data)(int destination, int buffer) =  NULL;
-int (*hal_comms_ready)(void) = NULL;
+int (*hal_set_data_fptr)(int destination, int buffer) =  NULL;
+int (*hal_get_data_fptr)(int destination, int buffer) =  NULL;
+int (*hal_comms_ready_fptr)(void) = NULL;
 
 
 void hal_init(void)
 {
-    hal_set_data = GENERIC_SEND;
-    hal_get_data = GENERIC_RECV;
-    hal_comms_ready = GENERIC_READY;
+    hal_set_data_fptr = GENERIC_SEND;
+    hal_get_data_fptr = GENERIC_RECV;
+    hal_comms_ready_fptr = GENERIC_READY;
 
 }
 
@@ -32,17 +32,17 @@ void hal_service(void)
 
 void hal_receive_data(char* data, int len)
 {
-    hal_get_data(data, len);
+    hal_get_data_fptr(data, len);
 }
 
 int hal_send_data(char* data, int len)
 {
-    return hal_set_data(data, len);
+    return hal_set_data_fptr(data, len);
 }
 
 int hal_device_ready(void)
 {
-    return hal_comms_ready();
+    return hal_comms_ready_fptr();
 }
 
 void hal_deinit(void)
