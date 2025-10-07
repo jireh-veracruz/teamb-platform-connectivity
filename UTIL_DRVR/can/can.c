@@ -42,6 +42,16 @@ void can_clear_bus() {
     bus_busy = 0;
 }
 
+bool get_bus_status(void) {
+    if (bus_busy) {
+        printf("Bus status: BUSY\n");
+        return 1;
+    } else {
+        printf("Bus status: FREE\n");
+        return 0;
+    }
+}
+
 // Simulated device communication
 void can_device_communicate(int device_id) {
     char buffer[BUS_SIZE];

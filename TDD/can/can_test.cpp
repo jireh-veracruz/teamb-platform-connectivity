@@ -31,6 +31,8 @@ TEST(can_test_group, can_clear_bus)
 {
     std::cout << "Test case: Clear CAN bus" << std::endl;
     can_clear_bus();
+    bool status = get_bus_status();
+    CHECK_EQUAL(0, status);
 }
 
 TEST(can_test_group, can_write_to_bus)

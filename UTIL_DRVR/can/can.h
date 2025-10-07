@@ -1,6 +1,7 @@
 #ifndef __CAN_H__
 #define __CAN_H__
 
+#include <stdbool.h>
 
 #define BUS_COMM_H
 
@@ -47,6 +48,7 @@ int can_write_to_bus(const char *msg, int device_id);
 int can_read_from_bus(char *buffer, int device_id);
 void can_clear_bus(void);
 void can_device_communicate(int device_id);
+bool get_bus_status(void);
 
 
 #endif //__CAN_H__

@@ -6,6 +6,19 @@ COMPONENT_NAME=can
 PARENT_FOLDER_NAME=UTIL_DRVR
 FOLDER_NAME=can
 
+# Flags for CppUTest to ignore warnings and unused variables
+CPPUTEST_WARNINGFLAGS += -Wall
+CPPUTEST_WARNINGFLAGS += -Werror
+CPPUTEST_WARNINGFLAGS += -Wno-int-to-pointer-cast
+# CPPUTEST_WARNINGFLAGS += -Wfatal-errors
+# CPPUTEST_WARNINGFLAGS += -Wswitch-default
+CPPUTEST_WARNINGFLAGS += -Wno-format-nonliteral
+CPPUTEST_WARNINGFLAGS += -Wno-sign-conversion
+CPPUTEST_WARNINGFLAGS += -Wno-pedantic
+CPPUTEST_WARNINGFLAGS += -Wno-shadow
+CPPUTEST_WARNINGFLAGS += -Wno-missing-field-initializers
+CPPUTEST_WARNINGFLAGS += -Wno-unused-parameter
+
 # Dynamically generate absolute paths
 MAKEFILE_DIR = $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 PROJECT_DIR = $(realpath $(MAKEFILE_DIR)../..)
