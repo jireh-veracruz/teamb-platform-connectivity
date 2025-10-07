@@ -43,4 +43,4 @@ CPPUTEST_HOME ?= $(UT_DIR)/cpputest
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include
 
 # Run MakefileWorker.mk with the variable set in this makefile
-include $(CPPUTEST_HOME)/build/MakefileWorker.mk
+include $(CPPUTEST_HOME)/builds/MakefileWorker.mk
