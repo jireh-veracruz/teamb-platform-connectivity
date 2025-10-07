@@ -12,8 +12,8 @@
 #include "common.h"
 
 
-int (*hal_set_data_fptr)(int destination, int buffer) =  NULL;
-int (*hal_get_data_fptr)(int destination, int buffer) =  NULL;
+int (*hal_set_data_fptr)(char* destination, int buffer) =  NULL;
+int (*hal_get_data_fptr)(char* destination, int buffer) =  NULL;
 int (*hal_comms_ready_fptr)(void) = NULL;
 
 

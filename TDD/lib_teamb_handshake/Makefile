@@ -1,5 +1,5 @@
 # Silence makefile
-# SILENCE = @
+SILENCE = @
 # Name of component under test
 # Change the name depending on the specific folder of the files to be tested.
 COMPONENT_NAME=lib_teamb_handshake
