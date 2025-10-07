@@ -1,4 +1,4 @@
 int main(void) {
-    // your code
+    // Code
     return 0;
 }
