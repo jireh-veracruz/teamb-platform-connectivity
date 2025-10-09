@@ -16,6 +16,7 @@ RUN apt-get update && \
     python3 \
     python3-pip \
     gcc-arm-none-eabi \
+    gcc-arm-linux-gnueabihf \
     libnewlib-arm-none-eabi \
     && rm -rf /var/lib/apt/lists/*
  
