@@ -1,13 +1,20 @@
 #!/bin/bash
 
 # Clean previous build
-rm -rf BUILD
+rm -rf BUILD/CM4 BUILD/CA7
 
-TOOLCHAIN="BSP/stm32/toolchain_stm32.cmake"
+# Build Cortex-M4
+cmake -G Ninja -B BUILD/CM4 \
+  -DCMAKE_TOOLCHAIN_FILE=BSP/stm32/toolchain_stm32_cm4.cmake \
+  -DTARGET_CORE=M4 \
+  -S .
 
-# Configure with CMake using the selected toolchain
-cmake -G Ninja -B BUILD \
-  -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN \
+cmake --build BUILD/CM4
 
-# Build the project
-cmake --build build
+# Build Cortex-A7
+cmake -G Ninja -B BUILD/CA7 \
+  -DCMAKE_TOOLCHAIN_FILE=BSP/stm32/toolchain_stm32_ca7.cmake \
+  -DTARGET_CORE=A7 \
+  -S .
+
+cmake --build BUILD/CA7

@@ -23,8 +23,8 @@ target_include_directories(connectivityBoard_CA7 PRIVATE
     ${CMAKE_SOURCE_DIR}/UTIL_DRVR/common/
 )
 
-# Add Output Format Targets
-add_custom_command(TARGET connectivityBoard_CA7 POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O binary connectivityBoard_CA7 connectivityBoard_CA7.bin
-    COMMAND ${CMAKE_OBJCOPY} -O ihex connectivityBoard_CA7 connectivityBoard_CA7.hex
-)
+# # Add Output Format Targets
+# add_custom_command(TARGET connectivityBoard_CA7 POST_BUILD
+#     COMMAND ${CMAKE_OBJCOPY} -O binary connectivityBoard_CA7 connectivityBoard_CA7.bin
+#     COMMAND ${CMAKE_OBJCOPY} -O ihex connectivityBoard_CA7 connectivityBoard_CA7.hex
+# )
