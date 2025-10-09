@@ -5,6 +5,6 @@ add_library(common_comm STATIC
 
 target_include_directories(common_comm PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_SOURCE_DIR}/UTIL_DRVR/common
-    ${CMAKE_SOURCE_DIR}/UTIL_DRVR/lib_teamb_handshake
+    ${CMAKE_SOURCE_DIR}/VENDORS/platform-commons/common
+    ${CMAKE_SOURCE_DIR}/VENDORS/platform-commons/lib_teamb_handshake
 )

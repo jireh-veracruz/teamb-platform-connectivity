@@ -6,6 +6,11 @@ add_executable(connectivityBoard_CM4
     ${CMAKE_SOURCE_DIR}/BSP/stm32/syscalls.c
 )
 
+# Link the mqtt and wifi libraries
+target_link_libraries(connectivityBoard_CM4 PRIVATE
+    commons
+)
+
 # Set linker script
 set_target_properties(connectivityBoard_CM4 PROPERTIES 
     LINK_FLAGS "-T${CMAKE_SOURCE_DIR}/BSP/stm32/stm32mp1/CM4/STM32MP15_CM4.ld"
@@ -14,7 +19,7 @@ set_target_properties(connectivityBoard_CM4 PROPERTIES
 # Include directories
 target_include_directories(connectivityBoard_CM4 PRIVATE
     ${CMAKE_SOURCE_DIR}/BSP/stm32/stm32mp1
-    ${CMAKE_SOURCE_DIR}/UTIL_DRVR/common
+    ${CMAKE_SOURCE_DIR}/VENDORS/platform-commons/common
 )
 
 # Add Output Format Targets

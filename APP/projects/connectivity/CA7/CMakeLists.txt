@@ -13,14 +13,14 @@ add_executable(connectivityBoard_CA7
 target_link_libraries(connectivityBoard_CA7 PRIVATE
     mqtt
     wifi
-    util_drvr
+    commons
 )
 
 # Include headers from mqtt and wifi
 target_include_directories(connectivityBoard_CA7 PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/mqtt
     ${CMAKE_CURRENT_SOURCE_DIR}/wifi
-    ${CMAKE_SOURCE_DIR}/UTIL_DRVR/common/
+    ${CMAKE_SOURCE_DIR}/VENDORS/platform-commons/common
 )
 
 # # Add Output Format Targets
