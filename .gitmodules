@@ -1,0 +1,3 @@
+[submodule "VENDORS/platform-commons"]
+	path = VENDORS/platform-commons
+	url = https://github.com/jireh-veracruz/platform-commons.git
