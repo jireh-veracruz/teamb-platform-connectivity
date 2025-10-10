@@ -20,7 +20,7 @@ target_link_libraries(connectivityBoard_CA7 PRIVATE
 target_include_directories(connectivityBoard_CA7 PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/mqtt
     ${CMAKE_CURRENT_SOURCE_DIR}/wifi
-    ${CMAKE_SOURCE_DIR}/VENDORS/platform-commons/common
+    ${CMAKE_SOURCE_DIR}/VENDORS/platform-commons/modules/common
 )
 
 # # Add Output Format Targets
