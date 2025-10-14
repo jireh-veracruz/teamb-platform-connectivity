@@ -1,20 +1,35 @@
 #!/bin/bash
 
+echo "Select target to build:"
+echo "1) Cortex-M4"
+echo "2) Cortex-A7"
+echo "3) Both"
+
+read -p "Enter choice [1-3]: " choice
+
 # Clean previous build
-rm -rf BUILD/CM4 BUILD/CA7
+rm -rf build/CM4 build/CA7 build/ALL
 
-# Build Cortex-M4
-cmake -G Ninja -B BUILD/CM4 \
-  -DCMAKE_TOOLCHAIN_FILE=BSP/stm32/toolchain_stm32_cm4.cmake \
-  -DTARGET_CORE=M4 \
-  -S .
-
-cmake --build BUILD/CM4
-
-# Build Cortex-A7
-cmake -G Ninja -B BUILD/CA7 \
-  -DCMAKE_TOOLCHAIN_FILE=BSP/stm32/toolchain_stm32_ca7.cmake \
-  -DTARGET_CORE=A7 \
-  -S .
-
-cmake --build BUILD/CA7
+case $choice in
+  1)
+    echo "Building Cortex-M4..."
+    cmake --preset cm4
+    cmake --build --preset cm4
+    ;;
+  2)
+    echo "Building Cortex-A7..."
+    cmake --preset ca7
+    cmake --build --preset ca7
+    ;;
+  3)
+    echo "Building both Cortex-M4 and Cortex-A7..."
+    cmake --preset cm4
+    cmake --build --preset cm4
+    cmake --preset ca7
+    cmake --build --preset ca7
+    ;;
+  *)
+    echo "Invalid choice. Exiting."
+    exit 1
+    ;;
+esac
