@@ -1,0 +1,60 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 13,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "cm4",
+      "displayName": "Build Cortex-M4",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/CM4",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "source/bsp/stm32mp1/CM4/toolchain_stm32_cm4.cmake",
+        "TARGET_CORE": "M4"
+      }
+    },
+    {
+      "name": "ca7",
+      "displayName": "Build Cortex-A7",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/CA7",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "source/bsp/stm32mp1/ca7/toolchain_stm32_ca7.cmake",
+        "TARGET_CORE": "A7"
+      }
+    },
+    {
+      "name": "all",
+      "displayName": "Build Both CM4 and CA7",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/ALL",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "BSP/stm32/toolchain_stm32_cm4.cmake",  // Default for initial config
+        "TARGET_CORE": "ALL"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "cm4",
+      "configurePreset": "cm4",
+      "description": "Build only Cortex-M4",
+      "jobs": 4
+    },
+    {
+      "name": "ca7",
+      "configurePreset": "ca7",
+      "description": "Build only Cortex-A7",
+      "jobs": 4
+    },
+    {
+      "name": "all",
+      "configurePreset": "all",
+      "description": "Build both CM4 and CA7",
+      "jobs": 4
+    }
+  ]
+}
