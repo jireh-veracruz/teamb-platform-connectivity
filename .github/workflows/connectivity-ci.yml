@@ -85,18 +85,21 @@ jobs:
           uses: actions/checkout@v4
 
         - name: Run static analysis with Cppcheck
-          if: steps.changes.outputs.project == 'true'
           run: |
-            echo "Running Cppcheck on ${{ matrix.project.name }}..."
-            cppcheck \
-              --enable=all \
-              --inconclusive \
-              --quiet \
-              --error-exitcode=1 \
-              --suppress=missingIncludeSystem \
-              source/app/projects/${{ matrix.project.name }} \
-              source/bsp \
-              include
+            docker run --rm \
+              -v $PWD:/workspace \
+              platform-builder \
+              bash -c "
+                echo "Running Cppcheck on ${{ matrix.project.name }}..."
+                cppcheck \
+                  --enable=all \
+                  --inconclusive \
+                  --quiet \
+                  --error-exitcode=1 \
+                  --suppress=missingIncludeSystem \
+                  workspace/source/app/projects/${{ matrix.project.name }} \
+                  workspace/source/bsp \
+                  workspace/include
         
         - name: Check for changes in ${{ matrix.project.name }}
           uses: dorny/paths-filter@v2

@@ -18,6 +18,7 @@ RUN apt-get update && \
     gcc-arm-none-eabi \
     gcc-arm-linux-gnueabihf \
     libnewlib-arm-none-eabi \
+    cppcheck \
     && rm -rf /var/lib/apt/lists/*
  
 # Create workspace directory
