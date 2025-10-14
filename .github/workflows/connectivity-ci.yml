@@ -83,22 +83,6 @@ jobs:
         steps:
         - name: Checkout code
           uses: actions/checkout@v4
-
-        - name: Run static analysis with Cppcheck
-          run: |
-            docker run --rm \
-              -v $PWD:/workspace \
-              platform-builder \
-              bash -c 'echo "Running Cppcheck on connectivity..." && \
-                cppcheck \
-                  --enable=all \
-                  --inconclusive \
-                  --quiet \
-                  --error-exitcode=1 \
-                  --suppress=missingIncludeSystem \
-                  /workspace/source/app/projects/connectivity \
-                  /workspace/source/bsp \
-                  /workspace/include'
         
         - name: Check for changes in ${{ matrix.project.name }}
           uses: dorny/paths-filter@v2
@@ -135,6 +119,22 @@ jobs:
                  echo 'Copying ${{ matrix.project.name }} build artifacts...' && 
                  find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
                 " 
+
+        - name: Run static analysis with Cppcheck
+          run: |
+            docker run --rm \
+              -v $PWD:/workspace \
+              platform-builder \
+              bash -c 'echo "Running Cppcheck on connectivity..." && \
+                cppcheck \
+                  --enable=all \
+                  --inconclusive \
+                  --quiet \
+                  --error-exitcode=1 \
+                  --suppress=missingIncludeSystem \
+                  /workspace/source/app/projects/connectivity \
+                  /workspace/source/bsp \
+                  /workspace/include'
         
         - name: Upload ${{ matrix.project.name }} artifacts
           if: steps.changes.outputs.project == 'true'
