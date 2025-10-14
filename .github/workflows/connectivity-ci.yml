@@ -89,17 +89,16 @@ jobs:
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
-              bash -c "
-                echo "Running Cppcheck on ${{ matrix.project.name }}..."
+              bash -c 'echo "Running Cppcheck on connectivity..." && \
                 cppcheck \
                   --enable=all \
                   --inconclusive \
                   --quiet \
                   --error-exitcode=1 \
                   --suppress=missingIncludeSystem \
-                  workspace/source/app/projects/${{ matrix.project.name }} \
-                  workspace/source/bsp \
-                  workspace/include
+                  /workspace/source/app/projects/connectivity \
+                  /workspace/source/bsp \
+                  /workspace/include'
         
         - name: Check for changes in ${{ matrix.project.name }}
           uses: dorny/paths-filter@v2
