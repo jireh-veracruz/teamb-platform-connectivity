@@ -102,7 +102,7 @@ jobs:
             exit 0
         
         - name: Build Docker image
-          if: steps.changes.outputs.project == 'true'
+          # if: steps.changes.outputs.project == 'true'
           run: |
             docker build -t platform-builder .
 
@@ -121,6 +121,7 @@ jobs:
                 " 
 
         - name: Run static analysis with Cppcheck
+          # if: steps.changes.outputs.project == 'true'
           run: |
             docker run --rm \
               -v $PWD:/workspace \
