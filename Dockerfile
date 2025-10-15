@@ -27,6 +27,9 @@ WORKDIR /workspace
 # Copy the entire project including scripts
 COPY . /workspace
 
+# Explicitly copy the modules folder (in case it's missed or symlinked)
+COPY vendors/platform-commons/modules/ /workspace/vendors/platform-commons/modules/
+
 # Make the script executable
 RUN chmod +x scripts/run_cppcheck.sh
  
