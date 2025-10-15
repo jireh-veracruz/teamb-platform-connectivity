@@ -20,6 +20,9 @@ RUN apt-get update && \
     libnewlib-arm-none-eabi \
     cppcheck \
     && rm -rf /var/lib/apt/lists/*
+
+# Install cpplint via pip
+RUN pip install cpplint
  
 # Create workspace directory
 WORKDIR /workspace
@@ -28,7 +31,8 @@ WORKDIR /workspace
 COPY . /workspace
 
 # Make the script executable
-RUN chmod +x scripts/run_cppcheck.sh
+RUN chmod +x scripts/run_cppcheck.sh \
+             scripts/run_cpplint.sh
  
 # Set default command to bash
 CMD ["/bin/bash"]

@@ -1,5 +1,5 @@
-#ifndef __APP_H__
-#define __APP_H__
+#ifndef SOURCE_APP_PROJECTS_CONNECTIVITY_APP_H_
+#define SOURCE_APP_PROJECTS_CONNECTIVITY_APP_H_
 
 //device status 
 #define DEV_STAT_UNKNOWN                    0
@@ -17,4 +17,4 @@ void connect_app(void);
 
 
 
-#endif //__APP_H__
+#endif //SOURCE_APP_PROJECTS_CONNECTIVITY_APP_H_

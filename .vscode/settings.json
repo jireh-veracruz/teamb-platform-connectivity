@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "common.h": "c"
+        "common.h": "c",
+        "handshake.h": "c",
+        "comms_msgs.h": "c",
+        "rpmsg_comm.h": "c"
     }
 }

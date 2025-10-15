@@ -26,7 +26,7 @@ SECTIONS
 		*(.text)
         *(.text*)
 
-					/* Todo: check if we need the next 3 lines */
+					/* TODO(KGalang@hennypenny.com): check if we need the next 3 lines */
 		*(.glue_7)         /* glue arm to thumb code */
 		*(.glue_7t)        /* glue thumb to arm code */
 		*(.eh_frame)

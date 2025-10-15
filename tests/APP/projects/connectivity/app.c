@@ -16,7 +16,7 @@
 #include "common.h"
 #include "handshake.h"
 #include "comms_msgs.h"
-#include "comms.h"
+#include "vendors/platform-commons/modules/common/common.h"
 
 #define SERVER_IP           "8.8.8.8"
 #define USERNAME            "kermithcute"

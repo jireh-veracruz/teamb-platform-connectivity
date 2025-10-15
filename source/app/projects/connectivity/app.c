@@ -1,4 +1,7 @@
 /*
+ *  Copyright (c) 2025, Team B
+ *  All rights reserved.
+ * 
  *  Connectivity PCB
  *  the goal of this project is create a peripheral
  *  that will facilitate the connection to the
@@ -10,13 +13,14 @@
  *  appropriate condition like, need to summarize the
  *  data or of sending to cloud failed, it should
  *  be stored in sdcard or eeprom
+ *
  * 
  */
 
-#include "common.h"
-#include "handshake.h"
-#include "comms_msgs.h"
-#include "comms.h"
+#include "source/app/projects/connectivity/app.h"
+#include "source/app/projects/connectivity/common/comms_msgs.h"
+#include "vendors/platform-commons/modules/common/common.h"
+#include "vendors/platform-commons/modules/lib_teamb_handshake/handshake.h"
 
 #define SERVER_IP           "8.8.8.8"
 #define USERNAME            "kermithcute"
@@ -28,38 +32,30 @@ int status_device = DEV_STAT_UNKNOWN;
 char data_buffer[CONN_MAX_MSG_BUFF];
 int returnvalue = 0;
 
-void establish_connectivity_to_server(void)
-{
-
+void establish_connectivity_to_server(void) {
 }
 
-
-void connect_setup_app(void)
-{
-    //init_devices()
-    //init_peripherals();
+void connect_setup_app(void) {
+    // init_devices()
+    // init_peripherals();
 }
 
-//NOTE: no while loop inside app
-void connect_app(void)
-{
-    
-    //input handler - wait do we have pushbotton or keyboard???
+// NOTE: no while loop inside app
+void connect_app(void) {
+    // input handler - wait do we have pushbotton or keyboard???
     returnvalue = connectivity_comms_input(&data_buffer, 1);
-    if(returnvalue == SUCCESS)
-    {
-        //do this!!!
+    if ( returnvalue == SUCCESS ) {
+        // do this!!!
     }
 
-    //comms message handler
+    // comms message handler
     returnvalue = connectivity_comms_handler(&data_buffer, 1);
-    //process what to do with the input
+    // process what to do with the input
 
-    //output - execute the planned outcome from
+    // output - execute the planned outcome from
     // process
     returnvalue = connectivity_comms_output(&data_buffer, 5);
 
-    
-    //service area
+    // service area
     teamb_handshake_service();
 }

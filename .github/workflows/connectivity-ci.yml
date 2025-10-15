@@ -74,10 +74,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-        - name: Checkout code
+        - name: Checkout Code
           uses: actions/checkout@v4
         
-        - name: Check for changes in connectivity
+        - name: Check for Source Code Changes
           uses: dorny/paths-filter@v2
           id: changes
           with:
@@ -94,12 +94,12 @@ jobs:
             echo "Skipping connectivity - no relevant changes detected"
             exit 0
         
-        - name: Build Docker image
+        - name: Build Docker Image
           # if: steps.changes.outputs.project == 'true'
           run: |
             docker build -t platform-builder .
 
-        - name: Build connectivity firmware
+        - name: Build Firmware
           if: steps.changes.outputs.project == 'true'
           run: |
             docker run --rm \
@@ -113,16 +113,22 @@ jobs:
         
         # - name: Check for memory leaks
         
-
-        - name: Run static analysis with Cppcheck
+        - name: Run Cppcheck
           # if: steps.changes.outputs.project == 'true'
           run: |
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
               bash -c "scripts/run_cppcheck.sh connectivity"
+
+        - name: Run Cpplint
+          run: |
+            docker run --rm \
+              -v $PWD:/workspace \
+              platform-builder \
+              bash -c "scripts/run_cpplint.sh"
         
-        - name: Upload connectivity artifacts
+        - name: Upload Artifacts
           if: steps.changes.outputs.project == 'true'
           uses: actions/upload-artifact@v4
           with:
