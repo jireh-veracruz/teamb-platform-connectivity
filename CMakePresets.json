@@ -32,10 +32,29 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/ALL",
       "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "BSP/stm32/toolchain_stm32_cm4.cmake",  // Default for initial config
+        "CMAKE_TOOLCHAIN_FILE": "BSP/stm32/toolchain_stm32_cm4.cmake",
         "TARGET_CORE": "ALL"
       }
+    },
+    {
+      "name": "cm4-debug",
+      "displayName": "Build Cortex-M4 Debug",
+      "inherits": "cm4",
+      "binaryDir": "${sourceDir}/build/CM4-Debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "ca7-debug",
+      "displayName": "Build Cortex-A7 Debug",
+      "inherits": "ca7",
+      "binaryDir": "${sourceDir}/build/CA7-Debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE":"Debug"
+      }
     }
+
   ],
   "buildPresets": [
     {
@@ -54,6 +73,18 @@
       "name": "all",
       "configurePreset": "all",
       "description": "Build both CM4 and CA7",
+      "jobs": 4
+    },
+    {
+      "name": "cm4-debug",
+      "configurePreset": "cm4-debug",
+      "description": "Build Cortex-M4 Debug",
+      "jobs": 4
+    },
+    {
+      "name": "ca7-debug",
+      "configurePreset": "ca7-debug",
+      "description": "Build Cortex-A7 Debug",
       "jobs": 4
     }
   ]
