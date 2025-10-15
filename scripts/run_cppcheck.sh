@@ -1,9 +1,10 @@
 #!/bin/bash
+set -e
+set -x  # Print commands as they run
 
 # Move to the project root (one level up from scripts/)
 cd "$(dirname "$0")/.."
-
-echo "Running Cppcheck..."
+echo "Running Cppcheck from $(pwd)"
 
 cppcheck \
   --enable=all \

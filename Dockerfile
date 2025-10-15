@@ -24,12 +24,11 @@ RUN apt-get update && \
 # Create workspace directory
 WORKDIR /workspace
  
-# Copy project files into the container
+# Copy the entire project including scripts
 COPY . /workspace
 
-# Copy the script from the correct location
-COPY scripts/run_cppcheck.sh /usr/local/bin/run_cppcheck.sh
-RUN chmod +x /usr/local/bin/run_cppcheck.sh
+# Make the script executable
+RUN chmod +x scripts/run_cppcheck.sh
  
 # Set default command to bash
 CMD ["/bin/bash"]
