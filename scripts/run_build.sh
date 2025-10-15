@@ -1,8 +1,10 @@
 #!/bin/bash
 
+# Ensure we're in the workspace root directory where CMakePresets.json is located
+cd /workspace
+
 # Create build directory if it doesn't exist
 mkdir -p build
-cd build
 
 echo "Building both Cortex-M4 and Cortex-A7..."
 
