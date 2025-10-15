@@ -4,3 +4,6 @@
 [submodule "tools/metrixplusplus"]
 	path = tools/metrixplusplus
 	url = https://github.com/metrixplusplus/metrixplusplus.git
+[submodule "vendors/metrixplusplus"]
+	path = vendors/metrixplusplus
+	url = https://github.com/metrixplusplus/metrixplusplus.git
