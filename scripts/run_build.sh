@@ -3,6 +3,9 @@
 # Ensure we're in the workspace root directory where CMakePresets.json is located
 cd /workspace
 
+# Initialize and update submodules
+git submodule update --init --recursive
+
 # Clean and recreate build directories
 rm -rf build/CM4 build/CA7
 mkdir -p build/CM4 build/CA7
