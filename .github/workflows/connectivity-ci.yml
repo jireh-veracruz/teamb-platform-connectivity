@@ -121,21 +121,12 @@ jobs:
                 " 
 
         - name: Run static analysis with Cppcheck
-          # if: steps.changes.outputs.project == 'true'
+          if: steps.changes.outputs.project == 'true'
           run: |
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
-              bash -c 'echo "Running Cppcheck on connectivity..." && \
-                cppcheck \
-                  --enable=all \
-                  --inconclusive \
-                  --quiet \
-                  --error-exitcode=1 \
-                  --suppress=missingIncludeSystem \
-                  /workspace/source/app/projects/connectivity \
-                  /workspace/source/bsp \
-                  /workspace/include'
+              bash -c "/usr/local/bin/run_cppcheck.sh ${{ matrix.project.name }}"
         
         - name: Upload ${{ matrix.project.name }} artifacts
           if: steps.changes.outputs.project == 'true'

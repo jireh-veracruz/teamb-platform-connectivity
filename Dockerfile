@@ -26,6 +26,10 @@ WORKDIR /workspace
  
 # Copy project files into the container
 COPY . /workspace
+
+# Add Cppcheck script to container
+COPY run_cppcheck.sh /usr/local/bin/run_cppcheck.sh
+RUN chmod +x /usr/local/bin/run_cppcheck.sh
  
 # Set default command to bash
 CMD ["/bin/bash"]
