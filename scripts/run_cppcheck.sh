@@ -9,9 +9,9 @@ cd "$(dirname "$0")/.."
 echo "Running Cppcheck from $(pwd)"
 
 cppcheck \
+  --check-config \
   --enable=all \
   --inconclusive \
-  --quiet \
   --error-exitcode=1 \
   --suppress=missingIncludeSystem \
   -I vendors/platform-commons/modules/can \
