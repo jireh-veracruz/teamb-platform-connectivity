@@ -4,6 +4,6 @@
  */
 
 int main(void) {
-    // Code test
+    // Code
     return 0;
 }
