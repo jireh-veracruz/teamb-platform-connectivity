@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Move to the project root (one level up from scripts/)
+cd "$(dirname "$0")/.."
+
 echo "Running Cppcheck..."
 
 cppcheck \
