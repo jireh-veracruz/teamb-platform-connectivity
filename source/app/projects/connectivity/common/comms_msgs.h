@@ -3,8 +3,8 @@
  * All rights reserved.
  */
 
-#ifndef __COMMS_MSGS_H__
-#define __COMMS_MSGS_H__
+#ifndef SOURCE_APP_PROJECTS_CONNECTIVITY_COMMON_COMMS_MSGS_H_
+#define SOURCE_APP_PROJECTS_CONNECTIVITY_COMMON_COMMS_MSGS_H_
 
 
 #define COMMON_MSG_NONE                    100
@@ -24,4 +24,4 @@
 
 
 
-#endif //__COMMS_MSGS_H__
+#endif //SOURCE_APP_PROJECTS_CONNECTIVITY_COMMON_COMMS_MSGS_H_

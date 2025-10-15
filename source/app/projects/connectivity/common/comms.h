@@ -3,8 +3,8 @@
  * All rights reserved.
  */
 
-#ifndef __COMMS_H__
-#define __COMMS_H__
+#ifndef SOURCE_APP_PROJECTS_CONNECTIVITY_COMMON_COMMS_H_
+#define SOURCE_APP_PROJECTS_CONNECTIVITY_COMMON_COMMS_H_
 
 int connectivity_comms_input(char* data, int len);
 int connectivity_comms_handler(char* data, int len);
@@ -22,4 +22,4 @@ int connectivity_comms_output(char* data, int len);
 #define CONN_MAX_MSG_BUFF               10
 
 
-#endif //__COMMS_H__
+#endif //SOURCE_APP_PROJECTS_CONNECTIVITY_COMMON_COMMS_H_
