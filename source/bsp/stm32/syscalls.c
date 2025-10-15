@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2025, Team B
+ * All rights reserved.
+ */
 
 #include <sys/stat.h>
 #include <unistd.h>

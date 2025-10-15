@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2025, Team B
+ * All rights reserved.
+ */
+
 #ifndef __APP_H__
 #define __APP_H__
 

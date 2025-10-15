@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2025, Team B
+ * All rights reserved.
+ */
+
 #ifndef __COMMS_MSGS_H__
 #define __COMMS_MSGS_H__
 

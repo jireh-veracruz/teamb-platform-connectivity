@@ -1,5 +1,6 @@
 /*
- * Connectivity Communications Output Handler
+ * Copyright (c) 2025, Team B
+ * All rights reserved.
  */
 
 #include "comms.h"

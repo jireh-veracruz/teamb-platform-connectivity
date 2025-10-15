@@ -4,6 +4,8 @@
   * @author  MCD Application Team  
   * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer System Source File
   *          for STM32MP1xx devices.
+  *          Copyright (c) 2025, Team B
+  *          All rights reserved.
   ******************************************************************************
   */
 

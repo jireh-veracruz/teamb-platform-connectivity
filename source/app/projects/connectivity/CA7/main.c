@@ -1,6 +1,7 @@
-// #include "wifi.h"
-// #include "mqtt.h"
-// #include "delay.h"
+/*
+ * Copyright (c) 2025, Team B
+ * All rights reserved.
+ */
 
 int main(void) {
     // wifi_init();

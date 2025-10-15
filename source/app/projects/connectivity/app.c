@@ -1,4 +1,7 @@
 /*
+ *  Copyright (c) 2025, Team B
+ *  All rights reserved.
+ * 
  *  Connectivity PCB
  *  the goal of this project is create a peripheral
  *  that will facilitate the connection to the
@@ -10,6 +13,7 @@
  *  appropriate condition like, need to summarize the
  *  data or of sending to cloud failed, it should
  *  be stored in sdcard or eeprom
+ *
  * 
  */
 
