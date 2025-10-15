@@ -72,25 +72,18 @@ jobs:
     build-platform-firmware:
         # needs: run-tdd-tests  # Only run if TDD tests pass
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                project: 
-                    - name: "connectivity"
-                      cmake_option: "BUILD_CONNECTIVITY=ON"
-                      artifact_name: "connectivity-firmware"
-                      paths: "source/app/projects/connectivity/**"
 
         steps:
         - name: Checkout code
           uses: actions/checkout@v4
         
-        - name: Check for changes in ${{ matrix.project.name }}
+        - name: Check for changes in connectivity
           uses: dorny/paths-filter@v2
           id: changes
           with:
             filters: |
               project:
-                - '${{ matrix.project.paths }}'
+                - 'source/app/projects/connectivity/**'
                 - 'source/bsp/**'
                 - 'CMakeLists.txt'
                 - 'Dockerfile'
@@ -98,7 +91,7 @@ jobs:
         - name: Skip if no changes
           if: steps.changes.outputs.project != 'true'
           run: |
-            echo "Skipping ${{ matrix.project.name }} - no relevant changes detected"
+            echo "Skipping connectivity - no relevant changes detected"
             exit 0
         
         - name: Build Docker image
@@ -106,19 +99,22 @@ jobs:
           run: |
             docker build -t platform-builder .
 
-        - name: Build ${{ matrix.project.name }} firmware
+        - name: Build connectivity firmware
           if: steps.changes.outputs.project == 'true'
           run: |
             docker run --rm \
-              -v $PWD/build-output-${{ matrix.project.name }}:/build-output \
+              -v $PWD/build-output-connectivity:/build-output \
                platform-builder \
                bash -c "
                  mkdir build && cd build && 
-                 cmake .. -DCMAKE_TOOLCHAIN_FILE=../source/bsp/stm32/toolchain.cmake -D${{ matrix.project.cmake_option }} && 
+                 cmake .. -DCMAKE_TOOLCHAIN_FILE=../source/bsp/stm32/toolchain.cmake -DBUILD_CONNECTIVITY=ON && 
                  make && 
-                 echo 'Copying ${{ matrix.project.name }} build artifacts...' && 
+                 echo 'Copying connectivity build artifacts...' && 
                  find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
                 " 
+        
+        # - name: Check for memory leaks
+        
 
         - name: Run static analysis with Cppcheck
           # if: steps.changes.outputs.project == 'true'
@@ -126,12 +122,12 @@ jobs:
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
-              bash -c "scripts/run_cppcheck.sh ${{ matrix.project.name }}"
+              bash -c "scripts/run_cppcheck.sh connectivity"
         
-        - name: Upload ${{ matrix.project.name }} artifacts
+        - name: Upload connectivity artifacts
           if: steps.changes.outputs.project == 'true'
           uses: actions/upload-artifact@v4
           with:
-            name: ${{ matrix.project.artifact_name }}
-            path: build-output-${{ matrix.project.name }}/*
+            name: connectivity-firmware
+            path: build-output-connectivity/*
             retention-days: 30
