@@ -123,6 +123,13 @@ jobs:
               -v $PWD:/workspace \
               platform-builder \
               bash -c "scripts/run_cppcheck.sh connectivity"
+
+        - name: Run cpplint
+          run: |
+            docker run --rm \
+              -v $PWD:/workspace \
+              platform-builder \
+              bash -c "scripts/run_cpplint.sh"
         
         - name: Upload connectivity artifacts
           if: steps.changes.outputs.project == 'true'
