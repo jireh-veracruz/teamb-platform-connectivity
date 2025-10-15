@@ -23,11 +23,10 @@ uint32_t SystemCoreClock = 200000000; /* 200 MHz default */
   * @param  None
   * @retval None
   */
-void SystemInit(void)
-{
+void SystemInit(void) {
   /* Basic system initialization - minimal implementation */
   /* Vector table is already set by startup code */
-  
+
   /* Configure system clocks if needed */
   /* This is a minimal implementation for compilation */
 }
@@ -40,8 +39,7 @@ void SystemInit(void)
   * @param  None
   * @retval None
   */
-void SystemCoreClockUpdate(void)
-{
+void SystemCoreClockUpdate(void) {
   /* SystemCoreClock update not implemented for this example */
   SystemCoreClock = 200000000; /* Fixed at 200 MHz for now */
 }

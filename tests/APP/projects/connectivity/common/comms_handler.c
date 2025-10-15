@@ -5,7 +5,7 @@
 
 #include "common.h"
 #include "handshake.h"
-#include "comms.h"
+#include "vendors/platform-commons/modules/common/common.h"
 #include "comms_msgs.h"
 
 

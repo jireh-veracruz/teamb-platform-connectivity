@@ -3,10 +3,9 @@
  * All rights reserved.
  */
 
-#include "comms.h"
+#include "vendors/platform-commons/modules/common/common.h"
 
-int connectivity_comms_input(char* data, int len)
-{
-    // TODO: Implement input communications handling
+int connectivity_comms_input(char* data, int len) {
+    // TODO(KGalang@hennypenny.com): Implement input communications handling
     return 0;
 }

@@ -2,7 +2,7 @@
  * Connectivity Communications Input Handler
  */
 
-#include "comms.h"
+#include "vendors/platform-commons/modules/common/common.h"
 
 int connectivity_comms_input(char* data, int len)
 {

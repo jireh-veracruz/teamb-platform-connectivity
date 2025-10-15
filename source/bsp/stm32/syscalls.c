@@ -25,7 +25,7 @@ int _write(int file, char *ptr, int len) {
 }
 
 int _sbrk(int incr) {
-    extern char _end; // Defined in linker script
+    extern char _end;  // Defined in linker script
     static char *heap_end;
     char *prev_heap_end;
 

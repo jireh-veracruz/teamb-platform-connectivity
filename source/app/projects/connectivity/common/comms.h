@@ -22,4 +22,4 @@ int connectivity_comms_output(char* data, int len);
 #define CONN_MAX_MSG_BUFF               10
 
 
-#endif //SOURCE_APP_PROJECTS_CONNECTIVITY_COMMON_COMMS_H_
+#endif  // SOURCE_APP_PROJECTS_CONNECTIVITY_COMMON_COMMS_H_

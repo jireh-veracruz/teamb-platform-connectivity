@@ -3,20 +3,16 @@
  * All rights reserved.
  */
 
-#include "common.h"
-#include "handshake.h"
-#include "comms.h"
-#include "comms_msgs.h"
+#include "source/app/projects/connectivity/common/comms_msgs.h"
+#include "vendors/platform-commons/modules/common/common.h"
+#include "vendors/platform-commons/modules/lib_teamb_handshake/handshake.h"
 
-
-//NOTE: no while loop inside app
-int connectivity_comms_handler(char* data, int len)
-{
+// NOTE: no while loop inside app
+int connectivity_comms_handler(char* data, int len) {
     (void)len;
-    //comms message handler
+    // comms message handler
     teamb_handshake_receive_data(data, 1);
-    switch(data[0])
-    {
+    switch (data[0]) {
         case COMMON_MSG_NONE:
             break;
         case COMMON_MSG_HI:
@@ -36,7 +32,7 @@ int connectivity_comms_handler(char* data, int len)
         case COMMON_MSG_CMD:
             break;
         default:
-            ;   //do nothing !!!
+            break;  // do nothing !!!
     }
 
     return data[1];
