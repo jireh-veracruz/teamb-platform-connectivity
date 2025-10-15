@@ -30,4 +30,4 @@ cppcheck \
   -I source/app/projects/connectivity \
   -I source/custom/log_service \
   source/app/projects/$1 \
-  source/bsp/stm32 \
+  source/bsp/stm32
