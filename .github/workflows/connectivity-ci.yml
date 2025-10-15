@@ -103,9 +103,8 @@ jobs:
           if: steps.changes.outputs.project == 'true'
           run: |
             docker run --rm \
-              -v $PWD/build-output-connectivity:/build-output \
+              -v $PWD:/workspace \
                platform-builder \
-               bash -c "
                  bash -c "scripts/run_build.sh" &&
                  echo 'Copying connectivity build artifacts...' && 
                  find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
