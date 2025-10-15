@@ -106,9 +106,7 @@ jobs:
               -v $PWD/build-output-connectivity:/build-output \
                platform-builder \
                bash -c "
-                 mkdir build && cd build && 
-                 cmake .. -DCMAKE_TOOLCHAIN_FILE=../source/bsp/stm32/toolchain.cmake -DBUILD_CONNECTIVITY=ON && 
-                 make && 
+                 bash -c "scripts/run_build.sh" &&
                  echo 'Copying connectivity build artifacts...' && 
                  find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
                 " 
