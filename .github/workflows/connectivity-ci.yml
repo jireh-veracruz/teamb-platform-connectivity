@@ -76,7 +76,13 @@ jobs:
         steps:
         - name: Checkout Code
           uses: actions/checkout@v4
-        
+          with:
+            submodules: true  # This ensures all submodules are initialized and update
+
+        - name: Initialize Submodules
+          run: |
+            git submodule update --init --recursive
+
         - name: Check for Source Code Changes
           uses: dorny/paths-filter@v2
           id: changes
