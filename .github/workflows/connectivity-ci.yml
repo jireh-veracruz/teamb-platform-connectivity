@@ -132,6 +132,13 @@ jobs:
               -v $PWD:/workspace \
               platform-builder \
               bash -c "scripts/run_cpplint.sh"
+
+        - name: Run Metrix++
+          run: |
+            docker run --rm \
+              -v $PWD:/workspace \
+              platform-builder \
+              bash -c "scripts/run_metrix++.sh"
         
         - name: Upload Artifacts
           if: steps.changes.outputs.project == 'true'

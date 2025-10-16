@@ -21,8 +21,8 @@ RUN apt-get update && \
     cppcheck \
     && rm -rf /var/lib/apt/lists/*
 
-# Install cpplint via pip
-RUN pip install cpplint
+# Install cpplint and Metrix++ via pip
+RUN pip install cpplint metrixpp
  
 # Create workspace directory
 WORKDIR /workspace
@@ -32,7 +32,8 @@ COPY . /workspace
 
 # Make the script executable
 RUN chmod +x scripts/run_cppcheck.sh \
-             scripts/run_cpplint.sh
+             scripts/run_cpplint.sh \
+             scripts/run_metrix++.sh
  
 # Set default command to bash
 CMD ["/bin/bash"]
