@@ -12,7 +12,7 @@ SOURCE_DIRS=("source" "vendor")
 
 # Function to find all directories containing .h files
 find_include_dirs() {
-  for dir in $SOURCE_DIRS; do
+  for dir in "${SOURCE_DIRS[@]}"; do
     [ -d "$dir" ] && find "$dir" -type f -name '*.h' -exec dirname {} \;
   done | sort -u
 }
