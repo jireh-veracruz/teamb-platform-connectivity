@@ -89,16 +89,7 @@ jobs:
           with:
             filters: |
               project:
-                - 'source/app/projects/connectivity/**'
-                - 'source/bsp/**'
-                - 'CMakeLists.txt'
-                - 'Dockerfile'
-        
-        - name: Skip if no changes
-          if: steps.changes.outputs.project != 'true'
-          run: |
-            echo "Skipping connectivity - no relevant changes detected"
-            exit 0
+                - 'source/**'
         
         - name: Build Docker Image
           # if: steps.changes.outputs.project == 'true'
@@ -140,9 +131,10 @@ jobs:
               bash -c "scripts/run_metrix++.sh"
         
         - name: Upload Artifacts
-          if: steps.changes.outputs.project == 'true'
           uses: actions/upload-artifact@v4
           with:
             name: connectivity-firmware
-            path: build-output-connectivity/*
+            path: |
+              build-output-connectivity/*
+              build/metrix++/metric.txt
             retention-days: 30
