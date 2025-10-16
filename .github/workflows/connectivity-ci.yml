@@ -135,6 +135,6 @@ jobs:
           with:
             name: connectivity-firmware
             path: |
-              build-output-connectivity/*
-              build/metrix++/metric.txt
+              build-output/*
+              build/metrix++/metrics.txt
             retention-days: 30
