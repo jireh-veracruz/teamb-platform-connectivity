@@ -97,7 +97,7 @@ jobs:
             docker build -t platform-builder .
 
         - name: Build Firmware
-          if: steps.changes.outputs.project == 'true'
+          # if: steps.changes.outputs.project == 'true'
           run: |
             docker run --rm \
               -v $PWD:/workspace \
