@@ -118,7 +118,7 @@ jobs:
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
-              bash -c "scripts/run_cppcheck.sh connectivity"
+              bash -c "scripts/run_cppcheck.sh"
 
         - name: Run Cpplint
           run: |
