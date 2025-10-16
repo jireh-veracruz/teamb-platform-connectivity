@@ -25,4 +25,4 @@ cmake --build --preset ca7
 # Copy build artifacts
 echo 'Copying connectivity build artifacts...'
 mkdir -p build-output
-find . -name "*.elf" -o -name "*.bin" -o -name "*.hex" -o -name "*.map" | xargs -I {} cp {} /build-output/ 2>/dev/null || true
+find . -name "*.elf" -o -name "*.bin" -o -name "*.hex" -o -name "*.map" | xargs -I {} cp {} build-output/ 2>/dev/null || true
