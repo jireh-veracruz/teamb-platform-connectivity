@@ -1,7 +1,7 @@
 #ifndef __CONNECT01_TREE_H__
 #define __CONNECT01_TREE_H__
 
-#include "common.h"
+#include "vendors/platform-commons/modules/common/common.h"
 
 #ifdef UART3
 #define UART3_TX_GPIO       PORTA_BIT4

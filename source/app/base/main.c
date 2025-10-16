@@ -1,4 +1,4 @@
-#include "common.h"
+#include "vendors/platform-commons/modules/common/common.h"
 
 #include "log.h"
 #include "app.h"
