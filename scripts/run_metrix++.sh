@@ -2,10 +2,22 @@
 
 echo "Running Metrix++ from $(pwd)"
 
-# Define source roots as an array
-OUTPUT_DIR=build/metrix++
+# Define output directory
+BUILD_DIR=build
+LOG_DIR=metrix++
+OUTPUT_DIR=$BUILD_DIR/$LOG_DIR
 
-mkdir -p $OUTPUT_DIR
+# Check if build directory exists
+if [ -d $BUILD_DIR ]; then
+    echo "Found $BUILD_DIR directory."
+    cd $BUILD_DIR
+    mkdir -p $LOG_DIR
+    echo "Created $LOG_DIR directory inside $BUILD_DIR folder."
+    cd ..
+else
+    echo "Error: build directory does not exist."
+    mkdir -p $OUTPUT_DIR
+fi
 
 # Collect all .c and .h files under source/
 files=()
@@ -30,6 +42,6 @@ metrix++ collect \
 metrix++ view \
     --db-file="$DB_FILE" \
     --format txt \
-    -- "${files[@]}" > $OUTPUT_DIR/metrics.txt
+    -- "${files[@]}" > $OUTPUT_DIR/metrics.log
 
-echo "Metrix++ analysis complete. Results saved to $OUTPUT_DIR/metrics.txt."
+echo "Metrix++ analysis complete. Results saved to $OUTPUT_DIR/metrics.log."
