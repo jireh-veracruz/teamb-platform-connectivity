@@ -1,5 +1,10 @@
-#ifndef __CONNECT01_TREE_H__
-#define __CONNECT01_TREE_H__
+/*
+ * Copyright (c) 2025, Team B
+ * All rights reserved.
+ */
+
+#ifndef SOURCE_CFG_CONNECT01_TREE_H_
+#define SOURCE_CFG_CONNECT01_TREE_H_
 
 #include "vendors/platform-commons/modules/common/common.h"
 
@@ -42,21 +47,19 @@
 #ifdef HANDSHAKE_COMMS
 
 #ifdef CAN_BUS
-#include "can.h"
+#include "vendors/platform-commons/modules/can/can.h"
 #define GENERIC_SEND        can_write_to_bus
 #define GENERIC_RECV        can_read_from_bus
 #define GENERIC_READY       can_clear_bus
-#endif 
+#endif
 
 #ifdef RS485_BUS
-#include "rs485.h"
+#include "vendors/platform-commons/modules/rs485/rs485.h"
 #define GENERIC_SEND        rs485_write_to_bus
 #define GENERIC_RECV        rs485_read_from_bus
 #define GENERIC_READY       rs485_clear_bus
-#endif 
+#endif
 
-#endif //HANDSHAKE_COMMS
+#endif  // HANDSHAKE_COMMS
 
-
-
-#endif //__CONNECT01_TREE_H__
+#endif  // SOURCE_CFG_CONNECT01_TREE_H_

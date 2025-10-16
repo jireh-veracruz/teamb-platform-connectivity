@@ -2,14 +2,11 @@
 
 echo "Running Cppcheck from $(pwd)"
 
-# List of directories to check
-SRC_DIRS=(
-  source/app/projects/connectivity
-  source/bsp/stm32
-)
+# Define source roots as an array
+SOURCE_DIRS=(source)
 
 # Run cpplint on each .c and .h file
-for dir in "${SRC_DIRS[@]}"; do
+for dir in "${SOURCE_DIRS[@]}"; do
   find "$dir" -name '*.c' -o -name '*.h' | while read -r file; do
     echo "Linting $file"
     cpplint "$file"

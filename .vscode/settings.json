@@ -3,6 +3,7 @@
         "common.h": "c",
         "handshake.h": "c",
         "comms_msgs.h": "c",
-        "rpmsg_comm.h": "c"
+        "rpmsg_comm.h": "c",
+        "app.h": "c"
     }
 }
