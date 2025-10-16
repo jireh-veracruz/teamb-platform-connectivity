@@ -3,4 +3,4 @@
  * All rights reserved.
  */
 
-#include "source/app/projects/connectivity/CA7/mqtt/mqtt.h"
+#include "mqtt.h"

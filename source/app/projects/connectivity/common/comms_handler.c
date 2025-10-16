@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-#include "source/app/projects/connectivity/common/comms_msgs.h"
-#include "vendors/platform-commons/modules/common/common.h"
-#include "vendors/platform-commons/modules/lib_teamb_handshake/handshake.h"
+#include "comms_msgs.h"
+#include "common.h"
+#include "handshake.h"
 
 // NOTE: no while loop inside app
 int connectivity_comms_handler(char* data, int len) {

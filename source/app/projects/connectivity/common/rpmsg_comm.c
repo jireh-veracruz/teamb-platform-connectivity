@@ -3,4 +3,4 @@
  * All rights reserved.
  */
 
-#include "source/app/projects/connectivity/common/rpmsg_comm.h"
+#include "rpmsg_comm.h"
