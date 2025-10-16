@@ -110,11 +110,10 @@ jobs:
           run: |
             docker run --rm \
               -v $PWD:/workspace \
-               platform-builder \
-                 bash -c "chmod +x scripts/run_build.sh && scripts/run_build.sh" &&
-                 echo 'Copying connectivity build artifacts...' && 
-                 find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true
-                " 
+              platform-builder \
+              bash -c "chmod +x scripts/run_build.sh && scripts/run_build.sh && \
+              echo 'Copying connectivity build artifacts...' && \
+              find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true"
         
         # - name: Check for memory leaks
         
