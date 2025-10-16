@@ -17,6 +17,14 @@ echo "Building CM4..."
 cmake --preset cm4
 cmake --build --preset cm4
 
+# Copy build artifacts
+echo 'Copying connectivity build artifacts...'
+mkdir -p build/images/
+find build/CM4 build/CA7 -type f \( \
+  -name "*.elf" -o -name "*.bin" -o -name "*.hex" -o -name "*.map" \
+\) ! -path "*/CMakeFiles/*" ! -path "*/CompilerId*/*" -exec cp {} build/images/ \;
+
+
 # Build CA7
 echo "Building CA7..."
 cmake --preset ca7
@@ -24,5 +32,8 @@ cmake --build --preset ca7
 
 # Copy build artifacts
 echo 'Copying connectivity build artifacts...'
-mkdir -p build-output
-find . -name "*.elf" -o -name "*.bin" -o -name "*.hex" -o -name "*.map" | xargs -I {} cp {} build-output/ 2>/dev/null || true
+mkdir -p build/images/
+find build/CM4 build/CA7 -type f \( \
+  -name "*.elf" -o -name "*.bin" -o -name "*.hex" -o -name "*.map" \
+\) ! -path "*/CMakeFiles/*" ! -path "*/CompilerId*/*" -exec cp {} build/images/ \;
+
