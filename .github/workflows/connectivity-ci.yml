@@ -138,5 +138,5 @@ jobs:
               build/images/*
               build/cppcheck/cppcheck_*.log
               build/cpplint/cpplint_*.log
-              build/metrix++/metrics_*.log
-            retention-days: 30
+              build/metrix++/metrics++_*.log
+            retention-days: 1
