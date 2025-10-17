@@ -19,6 +19,9 @@ RUN apt-get update && \
     gcc-arm-linux-gnueabihf \
     libnewlib-arm-none-eabi \
     cppcheck \
+    autoconf \
+    automake \
+    libtool \
     && rm -rf /var/lib/apt/lists/*
 
 # Install cpplint and Metrix++ via pip
@@ -34,6 +37,16 @@ COPY . /workspace
 RUN chmod +x scripts/run_cppcheck.sh \
              scripts/run_cpplint.sh \
              scripts/run_metrix++.sh
+
+# Download and build CppUTest tools
+RUN mkdir tools/ && \
+    wget https://github.com/cpputest/cpputest/releases/download/latest-passing-build/cpputest-latest.tar.gz && \
+    tar xf cpputest-latest.tar.gz && \
+    mv cpputest-latest/ tools/cpputest/ && \
+    cd tools/cpputest/ && \
+    autoreconf -i --force && \
+    ./configure && \
+    make
  
 # Set default command to bash
 CMD ["/bin/bash"]
