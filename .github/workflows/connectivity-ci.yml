@@ -136,7 +136,7 @@ jobs:
             name: connectivity-firmware
             path: |
               build/images/*
-              build/cppcheck/cppcheck.log
-              build/cpplint/cpplint.log
-              build/metrix++/metrics.log
+              build/cppcheck/cppcheck_*.log
+              build/cpplint/cpplint_*.log
+              build/metrix++/metrics_*.log
             retention-days: 30
