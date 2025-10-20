@@ -51,7 +51,7 @@ jobs:
             name: test-reports
             path: |
               tests/mqtt/build/valgrind_report.txt
-            retention-days: 7
+            retention-days: 1
 
     # Build firmware (only if tests pass)
     build-platform-firmware:
