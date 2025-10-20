@@ -35,7 +35,8 @@ WORKDIR /workspace
 COPY . /workspace
 
 # Make the script executable
-RUN chmod +x scripts/run_cppcheck.sh \
+RUN chmod +x scripts/run_build.sh \
+             scripts/run_cppcheck.sh \
              scripts/run_cpplint.sh \
              scripts/run_metrix++.sh
 
