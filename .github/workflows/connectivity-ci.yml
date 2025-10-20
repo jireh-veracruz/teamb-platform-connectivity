@@ -43,6 +43,7 @@ jobs:
           # if: steps.changes.outputs.project == 'true'
           run: |
             docker run --rm \
+              -v $PWD:/workspace \
               platform-builder \
               bash -c "chmod +x scripts/run_build.sh && scripts/run_build.sh && \
               echo 'Copying connectivity build artifacts...' && \
@@ -63,6 +64,7 @@ jobs:
         - name: Run Valgrind Memory Leak Check
           run: |
             docker run --rm \
+              -v $PWD:/workspace \
               platform-builder \
               bash -c "cd /workspace/tests/mqtt/build && \
               valgrind --leak-check=full --show-leak-kinds=definite --quiet --error-exitcode=1 ./mqtt_tests 2>&1 | tee valgrind_report.txt && \
