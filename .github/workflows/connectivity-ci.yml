@@ -9,8 +9,8 @@ on:
 
 jobs:
 
-    # Run unit tests with Valgrind memory leak checking
-    run-unit-tests:
+    # Build and test platform firmware
+    build-and-test-firmware:
         runs-on: ubuntu-latest
 
         steps:
@@ -23,10 +23,28 @@ jobs:
           run: |
             git submodule update --init --recursive
 
+        - name: Check for Source Code Changes
+          uses: dorny/paths-filter@v2
+          id: changes
+          with:
+            filters: |
+              project:
+                - 'source/**'
+        
         - name: Build Docker Image
           run: |
             docker build -t platform-builder .
 
+        - name: Build Firmware
+          # if: steps.changes.outputs.project == 'true'
+          run: |
+            docker run --rm \
+              -v $PWD:/workspace \
+              platform-builder \
+              bash -c "chmod +x scripts/run_build.sh && scripts/run_build.sh && \
+              echo 'Copying connectivity build artifacts...' && \
+              find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true"
+        
         - name: Run MQTT Unit Tests with Valgrind
           run: |
             docker run --rm \
@@ -52,44 +70,6 @@ jobs:
             path: |
               tests/mqtt/build/valgrind_report.txt
             retention-days: 1
-
-    # Build firmware (only if tests pass)
-    build-platform-firmware:
-        needs: run-unit-tests  # Only run if unit tests pass
-        runs-on: ubuntu-latest
-
-        steps:
-        - name: Checkout Code
-          uses: actions/checkout@v4
-          with:
-            submodules: true  # This ensures all submodules are initialized and update
-
-        - name: Initialize Submodules
-          run: |
-            git submodule update --init --recursive
-
-        - name: Check for Source Code Changes
-          uses: dorny/paths-filter@v2
-          id: changes
-          with:
-            filters: |
-              project:
-                - 'source/**'
-        
-        - name: Build Docker Image
-          # if: steps.changes.outputs.project == 'true'
-          run: |
-            docker build -t platform-builder .
-
-        - name: Build Firmware
-          # if: steps.changes.outputs.project == 'true'
-          run: |
-            docker run --rm \
-              -v $PWD:/workspace \
-              platform-builder \
-              bash -c "chmod +x scripts/run_build.sh && scripts/run_build.sh && \
-              echo 'Copying connectivity build artifacts...' && \
-              find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true"
         
         - name: Run Cppcheck
           # if: steps.changes.outputs.project == 'true'
@@ -122,4 +102,5 @@ jobs:
               build/cppcheck/cppcheck_*.log
               build/cpplint/cpplint_*.log
               build/metrix++/metrix++_*.log
+              tests/mqtt/build/valgrind_report.txt
             retention-days: 1
