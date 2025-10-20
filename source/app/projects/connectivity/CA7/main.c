@@ -17,6 +17,6 @@ int main(void) {
     //     mqtt_publish("stm32mp1/demo", "Hello from STM32MP1 CA7!");
     //     delay_ms(5000);
     // }
-
+    // Test
     print_message("Hello World!");
 }
