@@ -47,7 +47,6 @@ jobs:
         - name: Run Unit Tests with Valgrind
           run: |
             docker run --rm \
-              -v $PWD:/workspace \
               platform-builder \
               bash -c "
               echo 'Building and running MQTT tests...' && \
