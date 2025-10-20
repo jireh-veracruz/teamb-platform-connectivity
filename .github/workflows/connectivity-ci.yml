@@ -48,19 +48,23 @@ jobs:
               echo 'Copying connectivity build artifacts...' && \
               find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true"
         
-        - name: Run Unit Tests with Valgrind
+        - name: Run Unit Tests
           run: |
             docker run --rm \
               platform-builder \
-              bash -c "
-              echo 'Building and running MQTT tests...' && \
+              bash -c "echo 'Building and running MQTT tests...' && \
               cd /workspace/tests/mqtt && \
               mkdir -p build && cd build && \
               cmake .. && \
               make && \
               echo '=== Running Tests Normally ===' && \
-              ./mqtt_tests && \
-              echo '=== Running Valgrind Memory Leak Check ===' && \
+              ./mqtt_tests"
+
+        - name: Run Valgrind Memory Leak Check
+          run: |
+            docker run --rm \
+              platform-builder \
+              bash -c "cd /workspace/tests/mqtt/build && \
               valgrind --leak-check=full --show-leak-kinds=definite --quiet --error-exitcode=1 ./mqtt_tests 2>&1 | tee valgrind_report.txt && \
               echo '=== Valgrind Summary ===' && \
               grep -E '(LEAK SUMMARY|ERROR SUMMARY|definitely lost|All heap blocks)' valgrind_report.txt || echo 'No memory issues detected'"
