@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$(cd "$(dirname "$0")" && pwd)/project_script_cfg"
+
 # Exit immediately if any command fails
 set -e
 
@@ -9,39 +11,19 @@ SCRIPT_NAME=$(basename "$0" .sh)
 echo "Running Cppcheck from $(pwd)"
 
 # Define output directory
-BUILD_DIR="build"
 LOG_DIR="${SCRIPT_NAME#run_}"
 LOG_NAME="$LOG_DIR"
-LOG_EXT="log"
 OUTPUT_DIR="$BUILD_DIR/$LOG_DIR"
 
-# Check if build directory exists
-if [ -d "$BUILD_DIR" ]; then
-    echo "Found $BUILD_DIR directory."
-    cd "$BUILD_DIR"
-    mkdir -p "$LOG_DIR"
-    echo "Created $LOG_DIR directory inside $BUILD_DIR folder."
-    cd ..
-else
-    echo "Error: build directory does not exist."
-    mkdir -p "$OUTPUT_DIR"
-fi
+# Ensure build and log directories exist
+[ -d "$BUILD_DIR" ] || { echo "Error: build directory does not exist."; mkdir -p "$BUILD_DIR"; }
+mkdir -p "$OUTPUT_DIR" && echo "Created $LOG_DIR directory inside $BUILD_DIR folder."
 
-# Find the next available log file number
-i=1
-while true; do
-    LOG_FILE="${LOG_NAME}_$i.${LOG_EXT}"
-    if [ ! -e "$OUTPUT_DIR/$LOG_FILE" ]; then
-        break
-    fi
-    ((i++))
-done
-
-# Define source directory
-SOURCE_DIRS=("source")
+# Find next available log file number
+for ((i=1; ; i++)); do LOG_FILE="${LOG_NAME}_$i.${LOG_EXT}"; [ ! -e "$OUTPUT_DIR/$LOG_FILE" ] && break; done
 
 # Run cpplint on each .c and .h file
-for dir in "${SOURCE_DIRS[@]}"; do
+for dir in "${SRC_DIR[@]}"; do
   while IFS= read -r -d '' file; do
     echo "Linting $file"
     cpplint "$file" 2>> "$OUTPUT_DIR/$LOG_FILE" || echo "cpplint failed for $file"

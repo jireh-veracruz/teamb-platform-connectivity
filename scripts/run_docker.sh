@@ -1,8 +1,10 @@
 #!/bin/bash
 
+source "$(cd "$(dirname "$0")" && pwd)/project_script_cfg"
+
 # Build the Docker image
-echo "Building Docker image 'platform-builder'..."
-docker build -t platform-builder .
+echo "Building Docker image $DOCKER_IMAGE..."
+docker build -t $DOCKER_IMAGE .
 
 # Check if the build was successful
 if [ $? -ne 0 ]; then
@@ -12,4 +14,4 @@ fi
 
 # Run the Docker container interactively
 echo "Running Docker container..."
-docker run --rm -it -v "$(pwd)":/workspace -w /workspace platform-builder /bin/bash
+docker run --rm -it -v "$(pwd)":/workspace -w /workspace $DOCKER_IMAGE /bin/bash

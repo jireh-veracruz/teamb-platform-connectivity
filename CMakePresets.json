@@ -10,7 +10,7 @@
       "name": "cm4",
       "displayName": "Build Cortex-M4",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/CM4",
+      "binaryDir": "${sourceDir}/build/cm4",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "source/bsp/stm32/stm32mp1/CM4/toolchain_stm32_cm4.cmake",
         "TARGET_CORE": "M4"
@@ -20,7 +20,7 @@
       "name": "ca7",
       "displayName": "Build Cortex-A7",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/CA7",
+      "binaryDir": "${sourceDir}/build/ca7",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "source/bsp/stm32/stm32mp1/CA7/toolchain_stm32_ca7.cmake",
         "TARGET_CORE": "A7"
@@ -30,7 +30,7 @@
       "name": "all",
       "displayName": "Build Both CM4 and CA7",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/ALL",
+      "binaryDir": "${sourceDir}/build/all",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "BSP/stm32/toolchain_stm32_cm4.cmake",
         "TARGET_CORE": "ALL"

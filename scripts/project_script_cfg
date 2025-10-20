@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Project-specific configuration
+DOCKER_IMAGE="platform-builder"
+BUILD_DIR="build"
+LOG_EXT="log"
+SRC_DIR="source"
+INC_DIR=("source" "vendor")
+IMAGES_DIR="images"
+TARGET_NAME_1="cm4"
+TARGET_NAME_2="ca7"
+
+CPPCHECK_OPTIONS="--check-config \
+                  --enable=all \
+                  --inconclusive \
+                  --error-exitcode=1 \
+                  --suppress=missingIncludeSystem"
+METRIX_OPTIONS="--std.code.complexity.cyclomatic \
+                --std.code.lines.code \
+                --std.code.lines.comments \
+                --std.code.member.methods \
+                --std.code.member.classes \
+                --std.code.ratio.comments"

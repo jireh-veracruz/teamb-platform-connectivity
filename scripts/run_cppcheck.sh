@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Load project configuration
+source "$(cd "$(dirname "$0")" && pwd)/project_script_cfg"
+
 # Exit immediately if any command fails
 set -e
 
@@ -11,40 +14,20 @@ cd "$(dirname "$0")/.."
 echo "Running Cppcheck from $(pwd)"
 
 # Define output directory
-BUILD_DIR=build
 LOG_DIR="${SCRIPT_NAME#run_}"
 LOG_NAME="$LOG_DIR"
-LOG_EXT=log
 OUTPUT_DIR="$BUILD_DIR/$LOG_DIR"
 
-# Check if build directory exists
-if [ -d $BUILD_DIR ]; then
-    echo "Found $BUILD_DIR directory."
-    cd $BUILD_DIR
-    mkdir -p $LOG_DIR
-    echo "Created $LOG_DIR directory inside $BUILD_DIR folder."
-    cd ..
-else
-    echo "Error: build directory does not exist."
-    mkdir -p $OUTPUT_DIR
-fi
+# Ensure build and log directories exist
+[ -d "$BUILD_DIR" ] || { echo "Error: build directory does not exist."; mkdir -p "$BUILD_DIR"; }
+mkdir -p "$OUTPUT_DIR" && echo "Created $LOG_DIR directory inside $BUILD_DIR folder."
 
-# Find the next available log file number
-i=1
-while true; do
-    LOG_FILE="${LOG_NAME}_$i.${LOG_EXT}"
-    if [ ! -e "$OUTPUT_DIR/$LOG_FILE" ]; then
-        break
-    fi
-    ((i++))
-done
-
-# Define source roots as an array
-SOURCE_DIRS=("source" "vendor")
+# Find next available log file number
+for ((i=1; ; i++)); do LOG_FILE="${LOG_NAME}_$i.${LOG_EXT}"; [ ! -e "$OUTPUT_DIR/$LOG_FILE" ] && break; done
 
 # Function to find all directories containing .h files
 find_include_dirs() {
-  for dir in "${SOURCE_DIRS[@]}"; do
+  for dir in "${INC_DIR[@]}"; do
     [ -d "$dir" ] && find "$dir" -type f -name '*.h' -exec dirname {} \;
   done | sort -u
 }
@@ -59,13 +42,9 @@ done
 INCLUDE_ARGS+=("-I" ".")
 
 cppcheck \
-  --check-config \
-  --enable=all \
-  --inconclusive \
-  --error-exitcode=1 \
-  --suppress=missingIncludeSystem \
+  $CPPCHECK_OPTIONS \
   "${INCLUDE_ARGS[@]}" \
-  source/$1 2> "$OUTPUT_DIR/$LOG_FILE"
+  $SRC_DIR/$1 2> "$OUTPUT_DIR/$LOG_FILE"
 
 echo "Cppcheck analysis complete." 
 echo "Log saved to $OUTPUT_DIR/$LOG_FILE"

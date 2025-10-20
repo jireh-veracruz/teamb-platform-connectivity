@@ -1,39 +1,35 @@
 #!/bin/bash
 
-# Ensure we're in the workspace root directory where CMakePresets.json is located
+# Load project configuration
+source "$(cd "$(dirname "$0")" && pwd)/project_script_cfg"
+
+# Move to workspace root
 cd /workspace
 
-# Initialize and update submodules
+# Initialize submodules
 git submodule update --init --recursive
 
+# Define build directories
+CORE_DIR_1="$BUILD_DIR/$TARGET_NAME_1"
+CORE_DIR_2="$BUILD_DIR/$TARGET_NAME_2"
+
 # Clean and recreate build directories
-rm -rf build/CM4 build/CA7
-mkdir -p build/CM4 build/CA7
+rm -rf "$CORE_DIR_1" "$CORE_DIR_2"
+mkdir -p "$CORE_DIR_1" "$CORE_DIR_2"
 
-echo "Building both Cortex-M4 and Cortex-A7..."
+echo "Building $TARGET_NAME_1 and $TARGET_NAME_2..."
 
-# Build CM4
-echo "Building CM4..."
-cmake --preset cm4
-cmake --build --preset cm4
+# Build $TARGET_NAME_1
+echo "Building $TARGET_NAME_1..."
+cmake --preset $TARGET_NAME_1 && cmake --build --preset $TARGET_NAME_1
 
-# Copy build artifacts
-echo 'Copying connectivity build artifacts...'
-mkdir -p build/images/
-find build/CM4 build/CA7 -type f \( \
-  -name "*.elf" -o -name "*.bin" -o -name "*.hex" -o -name "*.map" \
-\) ! -path "*/CMakeFiles/*" ! -path "*/CompilerId*/*" -exec cp {} build/images/ \;
-
-
-# Build CA7
-echo "Building CA7..."
-cmake --preset ca7
-cmake --build --preset ca7
+# Build $TARGET_NAME_2
+echo "Building $TARGET_NAME_2..."
+cmake --preset $TARGET_NAME_2 && cmake --build --preset $TARGET_NAME_2
 
 # Copy build artifacts
-echo 'Copying connectivity build artifacts...'
-mkdir -p build/images/
-find build/CM4 build/CA7 -type f \( \
+echo "Copying build artifacts..."
+mkdir -p "$BUILD_DIR/$IMAGES_DIR"
+find "$CORE_DIR_1" "$CORE_DIR_2" -type f \( \
   -name "*.elf" -o -name "*.bin" -o -name "*.hex" -o -name "*.map" \
-\) ! -path "*/CMakeFiles/*" ! -path "*/CompilerId*/*" -exec cp {} build/images/ \;
-
+\) ! -path "*/CMakeFiles/*" ! -path "*/CompilerId*/*" -exec cp {} "$BUILD_DIR/$IMAGES_DIR/" \;
