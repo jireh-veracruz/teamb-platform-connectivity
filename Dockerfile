@@ -22,6 +22,7 @@ RUN apt-get update && \
     autoconf \
     automake \
     libtool \
+    valgrind \
     && rm -rf /var/lib/apt/lists/*
 
 # Install cpplint and Metrix++ via pip

@@ -3,6 +3,8 @@
  * All rights reserved.
  */
 
+#include "mqtt.h"
+
 int main(void) {
     // wifi_init();
     // wifi_connect("YourSSID", "YourPassword");
@@ -15,4 +17,6 @@ int main(void) {
     //     mqtt_publish("stm32mp1/demo", "Hello from STM32MP1 CA7!");
     //     delay_ms(5000);
     // }
+
+    print_message("Hello World!");
 }

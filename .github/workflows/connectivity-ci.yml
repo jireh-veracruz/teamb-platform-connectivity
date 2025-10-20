@@ -8,65 +8,6 @@ on:
     workflow_dispatch:
 
 jobs:
-    # # Run all TDD tests
-    # run-tdd-tests:
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #     - name: Checkout code
-    #       uses: actions/checkout@v4
-    #       with:
-    #         submodules: recursive  # In case cpputest is a submodule
-        
-    #     - name: Install test dependencies
-    #       run: |
-    #         sudo apt-get update
-    #         sudo apt-get install -y \
-    #           build-essential \
-    #           cmake \
-    #           ninja-build \
-    #           git \
-    #           wget \
-    #           curl \
-    #           python3 \
-    #           python3-pip \
-    #           gcc-arm-none-eabi \
-    #           libnewlib-arm-none-eabi \
-    #           lcov \
-    #           gcovr
-        
-    #     - name: Build and run TDD tests
-    #       run: |
-    #         cd TDD
-    #         echo "Running all TDD tests..."
-    #         # Fix line endings for Windows-created files
-    #         sed -i 's/\r$//' Run_AllTest.sh
-    #         # Make script executable
-    #         chmod +x Run_AllTest.sh
-    #         # Run the test script
-    #         ./Run_AllTest.sh 
-        
-    #     - name: Generate test coverage report
-    #       run: |
-    #         cd TDD
-    #         # Generate coverage reports if available
-    #         find . -name "*.gcda" -o -name "*.gcno" | head -5
-    #         if [ -n "$(find . -name "*.gcda" 2>/dev/null)" ]; then
-    #           echo "Generating coverage report..."
-    #           gcovr -r . --html --html-details -o coverage.html
-    #         else
-    #           echo "No coverage data found"
-    #         fi
-        
-    #     - name: Upload test results
-    #       uses: actions/upload-artifact@v4
-    #       if: always()  # Upload even if tests fail
-    #       with:
-    #         name: tdd-test-results
-    #         path: |
-    #           TDD/**/*.xml
-    #           TDD/**/*.html
-    #           TDD/**/coverage.*
-    #         retention-days: 30
 
     # Build firmware (only if tests pass)
     build-platform-firmware:
@@ -105,8 +46,6 @@ jobs:
               bash -c "chmod +x scripts/run_build.sh && scripts/run_build.sh && \
               echo 'Copying connectivity build artifacts...' && \
               find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true"
-        
-        # - name: Check for memory leaks
         
         - name: Run Cppcheck
           # if: steps.changes.outputs.project == 'true'
