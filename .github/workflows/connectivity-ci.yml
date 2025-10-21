@@ -2,9 +2,15 @@ name: connectivity ci
 
 on:
     push:
-        branches: [ main, develop ]
+        branches:
+          - main
+          - develop
+          - 'feature/**'
     pull_request:
-        branches: [ main, develop ]
+        branches:
+          - main
+          - develop
+          - 'feature/**'
     workflow_dispatch:
 
 jobs:
