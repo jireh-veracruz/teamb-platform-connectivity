@@ -5,7 +5,6 @@ source "$(cd "$(dirname "$0")" && pwd)/project_script_cfg"
 # Build the Docker image
 echo "Building Docker image $DOCKER_IMAGE..."
 docker build -t $DOCKER_IMAGE .
-
 # Check if the build was successful
 if [ $? -ne 0 ]; then
     echo "Docker build failed. Exiting."

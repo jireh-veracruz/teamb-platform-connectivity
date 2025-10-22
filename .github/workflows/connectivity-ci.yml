@@ -2,9 +2,15 @@ name: connectivity ci
 
 on:
     push:
-        branches: [ main, develop ]
+        branches:
+          - main
+          - develop
+          - 'feature/**'
     pull_request:
-        branches: [ main, develop ]
+        branches:
+          - main
+          - develop
+          - 'feature/**'
     workflow_dispatch:
 
 jobs:
@@ -51,14 +57,9 @@ jobs:
         - name: Run Unit Tests
           run: |
             docker run --rm \
+              -v $PWD:/workspace \
               platform-builder \
-              bash -c "echo 'Building and running MQTT tests...' && \
-              cd /workspace/tests/mqtt && \
-              mkdir -p build && cd build && \
-              cmake .. && \
-              make && \
-              echo '=== Running Tests Normally ===' && \
-              ./mqtt_tests"
+              bash -c "scripts/run_test.sh"
 
         - name: Run Valgrind Memory Leak Check
           run: |
