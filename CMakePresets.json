@@ -12,8 +12,8 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/cm4",
       "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "source/bsp/stm32/stm32mp1/CM4/toolchain_stm32_cm4.cmake",
-        "TARGET_CORE": "M4"
+        "CMAKE_TOOLCHAIN_FILE": "scripts/cmake/toolchain/cm4/toolchain_stm32_cm4.cmake",
+        "TARGET_CORE": "cm4"
       }
     },
     {
@@ -22,8 +22,8 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/ca7",
       "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "source/bsp/stm32/stm32mp1/CA7/toolchain_stm32_ca7.cmake",
-        "TARGET_CORE": "A7"
+        "CMAKE_TOOLCHAIN_FILE": "scripts/cmake/toolchain/ca7/toolchain_stm32_ca7.cmake",
+        "TARGET_CORE": "ca7"
       }
     },
     {

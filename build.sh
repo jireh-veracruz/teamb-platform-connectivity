@@ -8,7 +8,7 @@ echo "3) Both"
 read -p "Enter choice [1-3]: " choice
 
 # Clean previous build
-rm -rf build/CM4 build/CA7 build/ALL
+rm -rf build/cm4 build/ca7 build/ALL
 
 case $choice in
   1)
