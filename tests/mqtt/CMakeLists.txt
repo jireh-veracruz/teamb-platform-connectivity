@@ -17,13 +17,13 @@ message(STATUS CPPUTEST_HOME: ${CPPUTEST_HOME})
 include_directories(${CPPUTEST_HOME}/include)
 
 # Include project-specific headers
-include_directories(${CMAKE_SOURCE_DIR}/../../source/app/projects/connectivity/CA7/mqtt)
+include_directories(${CMAKE_SOURCE_DIR}/../../source/app/mqtt)
 
 # Define test executable
 add_executable(mqtt_tests
     test.cpp
     main.cpp
-    ../../source/app/projects/connectivity/CA7/mqtt/mqtt.c)
+    ../../source/app/mqtt/mqtt.c)
 
 # Link against CppUTest static libraries
 target_link_libraries(mqtt_tests
