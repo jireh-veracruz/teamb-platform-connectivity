@@ -34,11 +34,11 @@ WORKDIR /workspace
 # Copy the entire project including scripts
 COPY . /workspace
 # Make the scripts executable
-RUN chmod +x scripts/run_build.sh \
-             scripts/run_cppcheck.sh \
-             scripts/run_cpplint.sh \
-             scripts/run_metrix++.sh \
-             scripts/run_test.sh
+RUN chmod +x scripts/build/run_build.sh \
+             scripts/build/run_cppcheck.sh \
+             scripts/build/run_cpplint.sh \
+             scripts/build/run_metrix++.sh \
+             scripts/build/run_test.sh
 
 # Download and build CppUTest tools
 RUN mkdir -p tools && \
