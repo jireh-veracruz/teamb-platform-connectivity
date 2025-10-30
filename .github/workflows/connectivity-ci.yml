@@ -17,7 +17,7 @@ on:
 jobs:
 
     # Firmware CI Pipeline
-    build-and-test-firmware:
+    firmware-ci-pipeline:
         runs-on: ubuntu-latest
 
         steps:
