@@ -16,7 +16,7 @@ on:
 
 jobs:
 
-    # Build and test platform firmware
+    # Firmware CI Pipeline
     build-and-test-firmware:
         runs-on: ubuntu-latest
 
