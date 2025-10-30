@@ -3,8 +3,18 @@
 # Load project configuration
 source "$(cd "$(dirname "$0")" && pwd)/../cfg/project_script_cfg"
 
+# Exit immediately if any command fails
+set -e
+
+# Detect if running inside Docker
+if [ -d "/workspace" ]; then
+    WORKSPACE="/workspace"
+else
+    WORKSPACE="$(pwd)"
+fi
+
 # Move to workspace root
-cd /workspace
+cd "$WORKSPACE"
 
 # Initialize submodules
 git submodule update --init --recursive
