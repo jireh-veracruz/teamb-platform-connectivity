@@ -71,14 +71,6 @@ jobs:
               valgrind --leak-check=full --show-leak-kinds=definite --quiet --error-exitcode=1 ./mqtt_tests 2>&1 | tee valgrind_report.txt && \
               echo '=== Valgrind Summary ===' && \
               grep -E '(LEAK SUMMARY|ERROR SUMMARY|definitely lost|All heap blocks)' valgrind_report.txt || echo 'No memory issues detected'"
-
-        - name: Upload Test Reports
-          uses: actions/upload-artifact@v4
-          with:
-            name: test-reports
-            path: |
-              tests/mqtt/build/valgrind_report.txt
-            retention-days: 1
         
         - name: Run Cppcheck
           # if: steps.changes.outputs.project == 'true'
@@ -112,4 +104,5 @@ jobs:
               build/cpplint/cpplint_*.log
               build/metrix++/metrix++_*.log
               tests/mqtt/build/valgrind_report.txt
+              build/coverage-report/index.html
             retention-days: 1
