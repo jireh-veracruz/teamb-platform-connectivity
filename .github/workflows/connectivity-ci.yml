@@ -104,5 +104,5 @@ jobs:
               build/cpplint/cpplint_*.log
               build/metrix++/metrix++_*.log
               tests/mqtt/build/valgrind_report.txt
-              build/coverage-report/index.html
+              build/coverage-report/*
             retention-days: 1
