@@ -22,6 +22,8 @@ RUN apt-get update && \
     autoconf \
     automake \
     libtool \
+    lcov \
+    gcovr \
     valgrind && \
     rm -rf /var/lib/apt/lists/*
 
