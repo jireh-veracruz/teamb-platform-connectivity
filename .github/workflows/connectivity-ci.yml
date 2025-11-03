@@ -6,6 +6,7 @@ on:
           - main
           - develop
           - 'feature/**'
+          - 'custom/**'
     pull_request:
         branches:
           - main
@@ -15,8 +16,8 @@ on:
 
 jobs:
 
-    # Build and test platform firmware
-    build-and-test-firmware:
+    # Firmware CI Pipeline
+    firmware-ci-pipeline:
         runs-on: ubuntu-latest
 
         steps:
@@ -51,7 +52,7 @@ jobs:
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
-              bash -c "set -e; scripts/run_build.sh && \
+              bash -c "set -e; scripts/build/run_build.sh && \
               find . -name '*.elf' -o -name '*.bin' -o -name '*.hex' -o -name '*.map' | xargs -I {} cp {} /build-output/ 2>/dev/null || true"
         
         - name: Run Unit Tests
@@ -59,7 +60,7 @@ jobs:
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
-              bash -c "scripts/run_test.sh"
+              bash -c "scripts/build/run_test.sh"
 
         - name: Run Valgrind Memory Leak Check
           run: |
@@ -85,21 +86,21 @@ jobs:
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
-              bash -c "scripts/run_cppcheck.sh"
+              bash -c "scripts/build/run_cppcheck.sh"
 
         - name: Run Cpplint
           run: |
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
-              bash -c "scripts/run_cpplint.sh"
+              bash -c "scripts/build/run_cpplint.sh"
 
         - name: Run Metrix++
           run: |
             docker run --rm \
               -v $PWD:/workspace \
               platform-builder \
-              bash -c "scripts/run_metrix++.sh"
+              bash -c "scripts/build/run_metrix++.sh"
         
         - name: Upload Artifacts
           uses: actions/upload-artifact@v4

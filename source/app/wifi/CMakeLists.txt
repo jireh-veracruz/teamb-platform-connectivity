@@ -1,0 +1,5 @@
+file(GLOB_RECURSE WIFI_SRC CONFIGURE_DEPENDS "*.c")
+file(GLOB_RECURSE WIFI_HDR CONFIGURE_DEPENDS "*.h")
+
+add_library(wifi STATIC ${WIFI_SRC})
+target_include_directories(wifi PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

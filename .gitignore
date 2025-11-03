@@ -1,2 +1,4 @@
-# Ignore build folder
-build/
+# Ignore root build folder
+/build/
+tests/mqtt/build/
+!/scripts/build/
