@@ -7,3 +7,6 @@
 [submodule "vendors/metrixplusplus"]
 	path = vendors/metrixplusplus
 	url = https://github.com/metrixplusplus/metrixplusplus.git
+[submodule "vendors/third-party/FreeRTOS"]
+	path = vendors/third-party/FreeRTOS
+	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
