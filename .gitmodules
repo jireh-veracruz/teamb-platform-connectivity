@@ -10,3 +10,6 @@
 [submodule "vendors/third-party/FreeRTOS"]
 	path = vendors/third-party/FreeRTOS
 	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
+[submodule "vendors/third-party/CMSIS"]
+	path = vendors/third-party/CMSIS
+	url = https://github.com/ARM-software/CMSIS_5.git
