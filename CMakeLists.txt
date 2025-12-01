@@ -22,6 +22,29 @@ if(${TARGET_CORE} STREQUAL "ca7")
     )
 endif()
 
+if(${TARGET_CORE} STREQUAL "cm4")
+    target_include_directories(freertos_kernel
+    SYSTEM
+        PUBLIC
+            ${CMAKE_SOURCE_DIR}/vendors/third-party/CMSIS/CMSIS/Core/Include
+)
+
+    add_library(freertos_config INTERFACE)
+    target_include_directories(freertos_config SYSTEM
+        INTERFACE
+            ${CMAKE_SOURCE_DIR}/source/cfg
+    )
+
+    target_compile_definitions(freertos_config
+        INTERFACE
+            projCOVERAGE_TEST=0
+    )
+
+    set(FREERTOS_PORT GCC_ARM_CM4F)
+    add_subdirectory(${VENDOR_PATH}/third-party/FreeRTOS)
+    target_link_libraries(${PROJECT_NAME} PRIVATE freertos_kernel)
+endif()
+
 # Set linker script
 target_link_options(${PROJECT_NAME} PRIVATE
     "-T${BOARD_PATH}/linker/${TARGET_CORE}/STM32MP15.ld"
